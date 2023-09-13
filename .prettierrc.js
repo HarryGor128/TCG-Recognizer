@@ -1,12 +1,20 @@
 module.exports = {
-  arrowParens: 'avoid',
-  bracketSameLine: true,
-  bracketSpacing: false,
-  singleQuote: true,
-  trailingComma: 'all',
-  endOfLine: 'auto',
-  rules: {
-    'react-native/no-inline-styles': 0,
-    'prettier/prettier': 0
-  },
+    printWidth: 80,
+    arrowParens: 'always',
+    bracketSameLine: false,
+    bracketSpacing: true,
+    singleQuote: true,
+    trailingComma: 'all',
+    endOfLine: 'auto',
+    tabWidth: 4,
+    useTabs: false,
+    semi: true,
+    jsxSingleQuote: true,
+    rules: {
+        'react-native/no-inline-styles': 0,
+        'prettier/prettier': 0,
+    },
+    importOrder: ['^components/(.*)$', '^[./]'],
+    importOrderSeparation: true,
+    importOrderSortSpecifiers: true,
 };
