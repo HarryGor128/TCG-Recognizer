@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
-import useCustomLoader from '../../Components/CustomLoader/useCustomLoader';
+
+import { openLoader } from '../../store/reducer/appStateSlice';
+import { useAppDispatch } from '../../store/storeHooks';
 
 const ScanningScreen = () => {
-    const { setIsLoading } = useCustomLoader();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
-        setIsLoading(true);
+        dispatch(openLoader());
     }, []);
 
     return <TouchableOpacity style={{ flex: 1, backgroundColor: 'white' }} />;

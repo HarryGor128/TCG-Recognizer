@@ -14,7 +14,14 @@ module.exports = {
         'react-native/no-inline-styles': 0,
         'prettier/prettier': 0,
     },
-    importOrder: ['^components/(.*)$', '^[./]'],
+    importOrder: [
+        '^(react|react-(.*)$)',
+        '<THIRD_PARTY_MODULES>',
+        '^(Components/(.*)$|./Components/(.*)$|../Components/(.*)$)',
+        '^(Page/(.*)$|./Page/(.*)$|../Page/(.*)$)',
+        '^(store/(.*)$|./store/(.*)$|../store/(.*)$)',
+        '^[./(.*)$|../(.*)$]',
+    ],
     importOrderSeparation: true,
     importOrderSortSpecifiers: true,
 };

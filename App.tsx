@@ -6,16 +6,20 @@ import { faMugSaucer } from '@fortawesome/free-solid-svg-icons';
 import { NavigationContainer } from '@react-navigation/native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import 'react-native-devsettings';
+import { Provider } from 'react-redux';
+import { store } from './scr/store/store';
 
 library.add(fab, faSquareCheck, faMugSaucer);
 
 const App = () => {
     return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
-            <NavigationContainer>
-                <AppContainer />
-            </NavigationContainer>
-        </GestureHandlerRootView>
+        <Provider store={store}>
+            <GestureHandlerRootView style={{ flex: 1 }}>
+                <NavigationContainer>
+                    <AppContainer />
+                </NavigationContainer>
+            </GestureHandlerRootView>
+        </Provider>
     );
 };
 

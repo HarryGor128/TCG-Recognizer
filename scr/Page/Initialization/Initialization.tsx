@@ -1,17 +1,15 @@
 import { useEffect } from 'react';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
-import useCustomLoader from '../../Components/CustomLoader/useCustomLoader';
+import { useNavigation } from '@react-navigation/native';
 
-type Props = NativeStackScreenProps<ScreenParamList, 'Initialization'>;
+type Props = NativeStackNavigationProp<ScreenParamList, 'Initialization'>;
 
-const InitializationScreen = ({ navigation }: Props) => {
-    const { setIsLoading } = useCustomLoader();
+const InitializationScreen = () => {
+    const navigation = useNavigation<Props>();
 
     useEffect(() => {
-        setIsLoading(true);
         navigation.navigate('Scanning');
-        setIsLoading(false);
     }, []);
 
     return <></>;
