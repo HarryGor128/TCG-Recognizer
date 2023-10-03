@@ -1,9 +1,9 @@
-type CardSelectParam = { ScanningResult: any };
+type GoogleResultParam = { ScanningResult: string | undefined };
 
 type ScreenParamList = {
     Initialization: undefined;
     Scanning: undefined;
-    CardSelect: CardSelectParam;
+    GoogleResult: GoogleResultParam;
 };
 
 export default ScreenParamList;

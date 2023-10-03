@@ -1,5 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
+
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
+import GoogleResultScreen from '../GoogleResult/GoogleResultScreen';
 import InitializationScreen from '../Initialization/Initialization';
 import ScanningScreen from '../Scanning/ScanningScreen';
 
@@ -16,6 +18,10 @@ const MainStack = () => {
                 component={InitializationScreen}
             />
             <Stack.Screen name={'Scanning'} component={ScanningScreen} />
+            <Stack.Screen
+                name={'GoogleResult'}
+                component={GoogleResultScreen}
+            />
         </Stack.Navigator>
     );
 };

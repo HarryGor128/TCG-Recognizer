@@ -11,8 +11,10 @@ import { PermissionService } from './PermissionService';
 const mediaService = {
     /**
      *
+     * @param withBase64Header photo base64 return with data type header
      * @param quality 0 to 1
      * @param saveToPhotos (Boolean) Only for launchCamera, saves the image/video file captured to public photo
+     * @param didCancel When camera cancel
      * @returns Asset {
      *  base64?: string;
      *  uri?: string;
@@ -31,6 +33,7 @@ const mediaService = {
         withBase64Header = true,
         quality: PhotoQuality = 1,
         saveToPhotos: boolean = false,
+        didCancel: Function = () => {},
     ): Promise<Asset | undefined> {
         try {
             await PermissionService.CameraPermission();
@@ -40,6 +43,7 @@ const mediaService = {
                 quality,
                 saveToPhotos,
             });
+
             if (result.assets !== undefined) {
                 if (withBase64Header) {
                     result.assets[0].base64 = `data:${result.assets[0].type};base64,${result.assets[0].base64}`;
@@ -49,6 +53,12 @@ const mediaService = {
                     result.assets[0],
                 );
             }
+
+            if (result.didCancel) {
+                await didCancel();
+                return Promise.resolve({} as Asset);
+            }
+
             return Promise.resolve(
                 result.assets !== undefined ? result.assets[0] : ({} as Asset),
             );
