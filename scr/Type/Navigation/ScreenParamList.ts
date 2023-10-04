@@ -1,4 +1,4 @@
-type GoogleResultParam = { ScanningResult: string | undefined };
+type GoogleResultParam = { ScanningResult: string };
 
 type ScreenParamList = {
     Initialization: undefined;

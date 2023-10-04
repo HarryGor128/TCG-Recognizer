@@ -26,7 +26,7 @@ const ScanningScreen = () => {
 
         if (result?.base64 !== '') {
             navigation.navigate('GoogleResult', {
-                ScanningResult: result?.base64,
+                ScanningResult: result?.base64 ? result.base64 : '',
             });
         }
     };
