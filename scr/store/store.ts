@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import appStateSlice from './reducer/appStateSlice';
 
 export const store = configureStore({

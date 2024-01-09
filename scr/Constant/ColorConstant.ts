@@ -10,13 +10,23 @@ const ColorConstant = {
         },
 
         Grey: {
-            Light: '#bfbfbf',
-            Normal: '#808080',
-            Dark: '#4d4d4d',
+            Light: '#F6F6F6',
+            Normal: '#CECECE',
+            Dark: '#999999',
+            Deep: '#636363',
         },
 
         White: {
-            Normal: '#FFFFFF',
+            Light: '#FFFFFF',
+            Normal: '#F9F9F9',
+        },
+
+        Blue: {
+            Bright: '#EBEDF0',
+            Light: '#99D5E7',
+            Normal: '#A1BEE1',
+            Dark: '#3E588B',
+            Deep: '#282C34',
         },
     },
 
@@ -26,9 +36,9 @@ const ColorConstant = {
         },
 
         Grey: {
-            Light: '#bfbfbf',
-            Normal: '#808080',
-            Dark: '#4d4d4d',
+            Light: '#F6F6F6',
+            Normal: '#CECECE',
+            Dark: '#999999',
         },
 
         White: {
@@ -40,7 +50,11 @@ const ColorConstant = {
         },
 
         Blue: {
-            Normal: '#1434d7',
+            Bright: '#61DAFB',
+            Light: '#969FAF',
+            Normal: '#134484',
+            Dark: '#282C34',
+            Deep: '#1C1E21',
         },
 
         Green: {

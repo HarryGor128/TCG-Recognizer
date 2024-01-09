@@ -11,6 +11,13 @@ export interface AppIconProps {
     IconStyle?: FontAwesomeIconStyle; // Icon style
 }
 
+/**
+ *
+ * @param Icon: IconProp; // Display Icon
+ * @param IconSize?: number; // Icon size
+ * @param IconColor?: string; // Icon Color
+ * @param IconStyle?: FontAwesomeIconStyle; // Icon style
+ */
 const AppIcon = ({ Icon, IconSize, IconColor, IconStyle }: AppIconProps) => {
     return (
         <FontAwesomeIcon

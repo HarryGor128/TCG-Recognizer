@@ -13,7 +13,8 @@
         "portRestart": "net stop winnat && net start winnat",
         "reinstall": "rm -rf node_modules && rm package-lock.json && npm install",
         "reset": "npm start -- --reset-cache",
-        "android:adb": "adb reverse tcp:8081 tcp:8081",
+        "adbReverse": "adb reverse tcp:8081 tcp:8081",
+        "adbRestart": "adb kill-server && adb start-server",
         "stopGradle": "cd android && gradlew --stop && cd .."
     },
     "dependencies": {

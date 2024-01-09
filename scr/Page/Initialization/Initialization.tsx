@@ -17,7 +17,7 @@ const InitializationScreen = () => {
     useAndroidBackButton();
 
     useEffect(() => {
-        navigation.navigate('Scanning');
+        navigation.navigate('StartOption');
     }, []);
 
     return <></>;

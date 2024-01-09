@@ -1,7 +1,7 @@
 import {
-    IconProp,
-    IconPrefix,
     IconName,
+    IconPrefix,
+    IconProp,
 } from '@fortawesome/fontawesome-svg-core';
 
 const icon = (prefix: IconPrefix, name: IconName): IconProp => {

@@ -42,8 +42,10 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
         );
         setImageResult(result);
 
-        const annotationText = result.responses[0].fullTextAnnotation.text;
-        setTextList(annotationText.split('\n'));
+        if (result.responses[0].fullTextAnnotation) {
+            const annotationText = result.responses[0].fullTextAnnotation.text;
+            setTextList(annotationText.split('\n'));
+        }
 
         dispatch(closeLoader());
     };
