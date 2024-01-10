@@ -11,9 +11,9 @@ import {
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
-import ColorConstant from '../../Constant/ColorConstant';
-import FontSizeConstant from '../../Constant/FontSizeConstant';
-import IconConstant from '../../Constant/IconConstant';
+import ColorConstant from '../../../Constant/ColorConstant';
+import FontSizeConstant from '../../../Constant/FontSizeConstant';
+import IconConstant from '../../../Constant/IconConstant';
 
 export interface CustomButtonProps {
     OnPressCallback: Function; // Trigger function callback when press button

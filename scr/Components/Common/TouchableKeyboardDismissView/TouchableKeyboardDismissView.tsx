@@ -1,4 +1,5 @@
 import { Keyboard, TouchableWithoutFeedback } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 interface Props {
     children: React.ReactNode; // Display object

@@ -1,6 +1,7 @@
-import { ActivityIndicator, StyleSheet, View, Text } from 'react-native';
-import ColorConstant from '../../Constant/ColorConstant';
-import FontSizeConstant from '../../Constant/FontSizeConstant';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+
+import ColorConstant from '../../../Constant/ColorConstant';
+import FontSizeConstant from '../../../Constant/FontSizeConstant';
 
 export interface CustomLoaderProps {
     IsLoading: boolean;

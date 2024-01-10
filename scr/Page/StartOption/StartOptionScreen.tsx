@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 
-import CustomButton from '../../Components/CustomButton/CustomButton';
+import CustomButton from '../../Components/Common/CustomButton/CustomButton';
 
 const StartOptionScreen = () => {
     const onPressScanning = () => {};

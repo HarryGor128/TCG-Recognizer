@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 
-import CustomLoader from './Components/CustomLoader/CustomLoader';
-import TouchableKeyboardDismissView from './Components/TouchableKeyboardDismissView/TouchableKeyboardDismissView';
+import CustomLoader from './Components/Common/CustomLoader/CustomLoader';
+import TouchableKeyboardDismissView from './Components/Common/TouchableKeyboardDismissView/TouchableKeyboardDismissView';
 
 import MainStack from './Page/Stack/MainStack';
 
