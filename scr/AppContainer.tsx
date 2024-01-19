@@ -1,5 +1,6 @@
 import { View } from 'react-native';
 
+import AppPopup from './Components/Common/AppPopup/AppPopup';
 import CustomLoader from './Components/Common/CustomLoader/CustomLoader';
 import TouchableKeyboardDismissView from './Components/Common/TouchableKeyboardDismissView/TouchableKeyboardDismissView';
 
@@ -15,15 +16,17 @@ const AppContainer = () => {
     const appState = useAppSelector((state) => state.appState);
 
     return (
-        <View style={{ flex: 1 }}>
-            <TouchableKeyboardDismissView>
-                <MainStack />
-                <CustomLoader
-                    IsLoading={appState.isLoading}
-                    LoaderText={appState.loaderText}
-                />
-            </TouchableKeyboardDismissView>
-        </View>
+        <TouchableKeyboardDismissView>
+            <AppPopup>
+                <View style={{ flex: 1 }}>
+                    <MainStack />
+                    <CustomLoader
+                        IsLoading={appState.isLoading}
+                        LoaderText={appState.loaderText}
+                    />
+                </View>
+            </AppPopup>
+        </TouchableKeyboardDismissView>
     );
 };
 

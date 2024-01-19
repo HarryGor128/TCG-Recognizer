@@ -1,4 +1,5 @@
 import { ReactNode, createContext } from 'react';
+import { StyleProp, ViewStyle } from 'react-native';
 
 export type AppPopupContextType = {
     isShowPopup: boolean; // Popup visible
@@ -7,6 +8,8 @@ export type AppPopupContextType = {
     setPopupContent: Function; // Set popup content
     onClosePopup: Function; // On close popup function
     setOnClosePopup: Function; // Set on close popup function
+    popupContainerStyles: StyleProp<ViewStyle>; // Popup container styles
+    setPopupContainerStyles: Function; // Set popup container styles
 };
 
 const defaultAppPopupContext: AppPopupContextType = {
@@ -16,6 +19,8 @@ const defaultAppPopupContext: AppPopupContextType = {
     setPopupContent: () => {},
     onClosePopup: () => {},
     setOnClosePopup: () => {},
+    popupContainerStyles: {},
+    setPopupContainerStyles: () => {},
 };
 
 const AppPopupContext = createContext(defaultAppPopupContext);
@@ -27,5 +32,7 @@ const AppPopupContext = createContext(defaultAppPopupContext);
  * @param setPopupContent: Function; // Set popup content
  * @param onClosePopup: Function; // On close popup function
  * @param setOnClosePopup: Function; // Set on close popup function
+ * @param popupContainerStyles: StyleProp<ViewStyle>; // Popup container styles
+ * @param setPopupContainerStyles: Function; // Set popup container styles
  */
 export default AppPopupContext;

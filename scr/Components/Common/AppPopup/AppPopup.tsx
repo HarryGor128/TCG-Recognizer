@@ -1,11 +1,23 @@
 import { ReactNode, useState } from 'react';
-import { Keyboard, Modal, TouchableOpacity, View } from 'react-native';
+import {
+    Keyboard,
+    Modal,
+    StyleProp,
+    StyleSheet,
+    TouchableOpacity,
+    View,
+    ViewStyle,
+} from 'react-native';
 
 import ColorConstant from '../../../Constant/ColorConstant';
 import { useAppSelector } from '../../../store/storeHooks';
 import AppPopupContext, {
     AppPopupContextType,
 } from './Context/AppPopupContext';
+
+interface Props {
+    children: ReactNode;
+}
 
 /**
  * @description Use AppPopupContext to pass params
@@ -15,13 +27,18 @@ import AppPopupContext, {
  * @param setPopupContent: Function; // Set popup content
  * @param onClosePopup: Function; // On close popup function
  * @param setOnClosePopup: Function; // Set on close popup function
+ * @param popupContainerStyles: StyleProp<ViewStyle>; // Popup container styles
+ * @param setPopupContainerStyles: Function; // Set popup container styles
  */
-const AppPopup = () => {
+const AppPopup = ({ children }: Props) => {
     const { isKeyboardShow } = useAppSelector((state) => state.appState);
 
     const [isShowPopup, setShowPopup] = useState<boolean>(false);
     const [popupContent, setPopupContent] = useState<ReactNode>(<></>);
     const [onClosePopup, setOnClosePopup] = useState<Function>(() => {});
+    const [popupContainerStyles, setPopupContainerStyles] = useState<
+        StyleProp<ViewStyle>
+    >({});
 
     const value: AppPopupContextType = {
         isShowPopup,
@@ -30,13 +47,17 @@ const AppPopup = () => {
         setPopupContent,
         onClosePopup,
         setOnClosePopup,
+        popupContainerStyles,
+        setPopupContainerStyles,
     };
 
     const onPressBackground = () => {
         if (isKeyboardShow) {
             Keyboard.dismiss();
         } else {
-            onClosePopup();
+            if (onClosePopup) {
+                onClosePopup();
+            }
             setShowPopup(false);
         }
     };
@@ -46,18 +67,10 @@ const AppPopup = () => {
             <Modal transparent animationType={'fade'} visible={isShowPopup}>
                 <TouchableOpacity
                     onPress={onPressBackground}
-                    style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        backgroundColor: ColorConstant.Transparent.Black,
-                    }}
+                    style={AppPopupStyles.BG}
                 >
                     <View
-                        style={{
-                            flex: 1,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                        }}
+                        style={AppPopupStyles.container}
                         pointerEvents={'box-none'}
                         onStartShouldSetResponder={() => true}
                     >
@@ -65,8 +78,26 @@ const AppPopup = () => {
                     </View>
                 </TouchableOpacity>
             </Modal>
+            {children}
         </AppPopupContext.Provider>
     );
 };
 
 export default AppPopup;
+
+const AppPopupStyles = StyleSheet.create({
+    BG: {
+        flex: 1,
+        // alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: ColorConstant.Transparent.Black,
+    },
+
+    container: {
+        flex: 1,
+        margin: 20,
+        padding: 20,
+        borderRadius: 10,
+        backgroundColor: ColorConstant.BG.White.Normal,
+    },
+});
