@@ -3,13 +3,23 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import AppPopupContext from '../../Components/Common/AppPopup/Context/AppPopupContext';
 import CustomButton from '../../Components/Common/CustomButton/CustomButton';
+import ColorConstant from '../../Constant/ColorConstant';
+import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 
 const StartOptionScreen = () => {
-    const { setShowPopup, setPopupContent } = useContext(AppPopupContext);
+    useAndroidBackButton();
+
+    const {
+        setPopupContainerStyles,
+        setShowPopup,
+        setPopupContent,
+        setPopupTitle,
+        setPopupTitleStyles,
+    } = useContext(AppPopupContext);
 
     const onPressScanning = () => {
         const popup: ReactNode = (
-            <View style={StartOptionScreenStyles.popupContainer}>
+            <View style={StartOptionScreenStyles.popupContent}>
                 <CustomButton
                     OnPressCallback={() => {}}
                     ButtonText={'Scanning'}
@@ -21,13 +31,15 @@ const StartOptionScreen = () => {
                     ButtonText={'AR View'}
                     Icon={['fas', 'vr-cardboard']}
                     ContainerStyle={StartOptionScreenStyles.button}
-                    Disabled
                 />
             </View>
         );
 
         setShowPopup(true);
         setPopupContent(popup);
+        setPopupTitle('Upload from');
+        setPopupTitleStyles(StartOptionScreenStyles.titleText);
+        setPopupContainerStyles(StartOptionScreenStyles.popupContainer);
     };
 
     const onPressAR = () => {};
@@ -62,6 +74,7 @@ const StartOptionScreenStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         justifyContent: 'space-evenly',
+        backgroundColor: ColorConstant.BG.White.Normal,
     },
 
     buttonContainer: {
@@ -79,5 +92,16 @@ const StartOptionScreenStyles = StyleSheet.create({
         justifyContent: 'center',
     },
 
-    popupContainer: {},
+    popupContent: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+
+    popupContainer: {
+        height: 350,
+    },
+
+    titleText: {
+        color: ColorConstant.Text.Black.Normal,
+    },
 });

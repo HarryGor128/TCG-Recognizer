@@ -84,7 +84,7 @@ const CustomButton = (props: CustomButtonProps) => {
                     {
                         backgroundColor: Disabled
                             ? ColorConstant.BG.Grey.Normal
-                            : ColorConstant.BG.Blue.Normal,
+                            : ColorConstant.BG.Blue.Bright,
                     },
                     ButtonContainerStyle,
                 ]}

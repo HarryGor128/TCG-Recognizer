@@ -1,5 +1,7 @@
 import { ReactNode, createContext } from 'react';
-import { StyleProp, ViewStyle } from 'react-native';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
+
+import { AppIconProps } from './../../AppIcon/AppIconRenderer';
 
 export type AppPopupContextType = {
     isShowPopup: boolean; // Popup visible
@@ -10,6 +12,12 @@ export type AppPopupContextType = {
     setOnClosePopup: Function; // Set on close popup function
     popupContainerStyles: StyleProp<ViewStyle>; // Popup container styles
     setPopupContainerStyles: Function; // Set popup container styles
+    popupTitle?: string; // Popup title
+    setPopupTitle: Function; // Set popup title
+    popupTitleStyles?: StyleProp<TextStyle>; // Popup title styles
+    setPopupTitleStyles: Function; // Set Popup title styles
+    titleIcon?: AppIconProps; // Title icon
+    setTitleIcon: Function; // Set title icon
 };
 
 const defaultAppPopupContext: AppPopupContextType = {
@@ -21,6 +29,12 @@ const defaultAppPopupContext: AppPopupContextType = {
     setOnClosePopup: () => {},
     popupContainerStyles: {},
     setPopupContainerStyles: () => {},
+    popupTitle: undefined,
+    setPopupTitle: () => {},
+    popupTitleStyles: {},
+    setPopupTitleStyles: () => {},
+    titleIcon: undefined,
+    setTitleIcon: () => {},
 };
 
 const AppPopupContext = createContext(defaultAppPopupContext);
@@ -34,5 +48,11 @@ const AppPopupContext = createContext(defaultAppPopupContext);
  * @param setOnClosePopup: Function; // Set on close popup function
  * @param popupContainerStyles: StyleProp<ViewStyle>; // Popup container styles
  * @param setPopupContainerStyles: Function; // Set popup container styles
+ * @param popupTitle?: string; // Popup title
+ * @param setPopupTitle: Function; // Set popup title
+ * @param popupTitleStyles?: StyleProp<TextStyle>; // Popup title styles
+ * @param setPopupTitleStyles: Function; // Set Popup title styles
+ * @param titleIcon?: AppIconProps; // Title icon
+ * @param setTitleIcon: Function; // Set title icon
  */
 export default AppPopupContext;

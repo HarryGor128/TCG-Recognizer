@@ -4,6 +4,8 @@ import {
     Modal,
     StyleProp,
     StyleSheet,
+    Text,
+    TextStyle,
     TouchableOpacity,
     View,
     ViewStyle,
@@ -11,6 +13,7 @@ import {
 
 import ColorConstant from '../../../Constant/ColorConstant';
 import { useAppSelector } from '../../../store/storeHooks';
+import AppIcon, { AppIconProps } from '../AppIcon/AppIconRenderer';
 import AppPopupContext, {
     AppPopupContextType,
 } from './Context/AppPopupContext';
@@ -29,6 +32,12 @@ interface Props {
  * @param setOnClosePopup: Function; // Set on close popup function
  * @param popupContainerStyles: StyleProp<ViewStyle>; // Popup container styles
  * @param setPopupContainerStyles: Function; // Set popup container styles
+ * @param popupTitle?: string; // Popup title
+ * @param setPopupTitle: Function; // Set popup title
+ * @param popupTitleStyles?: StyleProp<TextStyle>; // Popup title styles
+ * @param setPopupTitleStyles: Function; // Set Popup title styles
+ * @param titleIcon?: AppIconProps; // Title icon
+ * @param setTitleIcon: Function; // Set title icon
  */
 const AppPopup = ({ children }: Props) => {
     const { isKeyboardShow } = useAppSelector((state) => state.appState);
@@ -39,6 +48,11 @@ const AppPopup = ({ children }: Props) => {
     const [popupContainerStyles, setPopupContainerStyles] = useState<
         StyleProp<ViewStyle>
     >({});
+    const [popupTitle, setPopupTitle] = useState<string | undefined>();
+    const [popupTitleStyles, setPopupTitleStyles] = useState<
+        StyleProp<TextStyle> | undefined
+    >();
+    const [titleIcon, setTitleIcon] = useState<AppIconProps | undefined>();
 
     const value: AppPopupContextType = {
         isShowPopup,
@@ -49,6 +63,12 @@ const AppPopup = ({ children }: Props) => {
         setOnClosePopup,
         popupContainerStyles,
         setPopupContainerStyles,
+        popupTitle,
+        setPopupTitle,
+        popupTitleStyles,
+        setPopupTitleStyles,
+        titleIcon,
+        setTitleIcon,
     };
 
     const onPressBackground = () => {
@@ -70,10 +90,27 @@ const AppPopup = ({ children }: Props) => {
                     style={AppPopupStyles.BG}
                 >
                     <View
-                        style={AppPopupStyles.container}
+                        style={[
+                            AppPopupStyles.container,
+                            popupContainerStyles && { flex: undefined },
+                            popupContainerStyles,
+                        ]}
                         pointerEvents={'box-none'}
                         onStartShouldSetResponder={() => true}
                     >
+                        {popupTitle && (
+                            <View style={AppPopupStyles.titleContainer}>
+                                {titleIcon && <AppIcon {...titleIcon} />}
+                                <Text
+                                    style={[
+                                        AppPopupStyles.title,
+                                        popupTitleStyles,
+                                    ]}
+                                >
+                                    {popupTitle}
+                                </Text>
+                            </View>
+                        )}
                         {popupContent}
                     </View>
                 </TouchableOpacity>
@@ -88,7 +125,6 @@ export default AppPopup;
 const AppPopupStyles = StyleSheet.create({
     BG: {
         flex: 1,
-        // alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: ColorConstant.Transparent.Black,
     },
@@ -99,5 +135,13 @@ const AppPopupStyles = StyleSheet.create({
         padding: 20,
         borderRadius: 10,
         backgroundColor: ColorConstant.BG.White.Normal,
+    },
+
+    title: {},
+
+    titleContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 20,
     },
 });
