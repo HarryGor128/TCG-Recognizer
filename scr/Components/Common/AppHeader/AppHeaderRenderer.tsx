@@ -12,6 +12,18 @@ interface AppHeaderProps {
     HeaderRight?: boolean; // Header disable right stack
 }
 
+/**
+ *
+ *  @param LeftStack?: React.ReactNode; // Header left element
+ *  @param RightStack?: React.ReactNode; // Header right element
+ *  @param Title?: string; // Header title text
+ *  @param BackgroundColor?: string; // Header color
+ *  @param HeaderTextColor?: string; // Header text color
+ *  @param HeaderTextSize?: number; // Header text size
+ *  @param HeaderBold?: boolean; // Header title text bold
+ *  @param HeaderLeft?: boolean; // Header disable left stack
+ *  @param HeaderRight?: boolean; // Header disable right stack
+ */
 const AppHeader = ({
     LeftStack,
     RightStack,
@@ -64,6 +76,5 @@ const styles = StyleSheet.create({
         maxWidth: '50%',
         textAlign: 'center',
         textAlignVertical: 'center',
-        // fontSize:
     },
 });

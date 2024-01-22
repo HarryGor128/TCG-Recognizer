@@ -4,6 +4,7 @@ type ScreenParamList = {
     Initialization: undefined;
     Scanning: undefined;
     StartOption: undefined;
+    ARView: undefined;
     GoogleResult: GoogleResultParam;
 };
 

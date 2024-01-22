@@ -1,48 +1,29 @@
-import { ReactNode, useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import AppPopupContext from '../../Components/Common/AppPopup/Context/AppPopupContext';
+import { NavigationProp } from '@react-navigation/native';
+
 import CustomButton from '../../Components/Common/CustomButton/CustomButton';
 import ColorConstant from '../../Constant/ColorConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
+import useCameraAlbum from '../../Hook/Common/useCameraAlbum';
+import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 
-const StartOptionScreen = () => {
+type StartOptionScreenProps = {
+    navigation: NavigationProp<ScreenParamList>;
+};
+
+const StartOptionScreen = ({ navigation }: StartOptionScreenProps) => {
     useAndroidBackButton();
 
-    const {
-        setPopupContainerStyles,
-        setShowPopup,
-        setPopupContent,
-        setPopupTitle,
-        setPopupTitleStyles,
-    } = useContext(AppPopupContext);
+    const { openUploadPopup } = useCameraAlbum();
 
     const onPressScanning = () => {
-        const popup: ReactNode = (
-            <View style={StartOptionScreenStyles.popupContent}>
-                <CustomButton
-                    OnPressCallback={() => {}}
-                    ButtonText={'Scanning'}
-                    Icon={['fas', 'expand']}
-                    ContainerStyle={StartOptionScreenStyles.button}
-                />
-                <CustomButton
-                    OnPressCallback={() => {}}
-                    ButtonText={'AR View'}
-                    Icon={['fas', 'vr-cardboard']}
-                    ContainerStyle={StartOptionScreenStyles.button}
-                />
-            </View>
-        );
-
-        setShowPopup(true);
-        setPopupContent(popup);
-        setPopupTitle('Upload from');
-        setPopupTitleStyles(StartOptionScreenStyles.titleText);
-        setPopupContainerStyles(StartOptionScreenStyles.popupContainer);
+        openUploadPopup();
     };
 
-    const onPressAR = () => {};
+    const onPressAR = () => {
+        navigation.navigate('ARView');
+    };
 
     return (
         <View style={StartOptionScreenStyles.mainContainer}>
@@ -90,18 +71,5 @@ const StartOptionScreenStyles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-    },
-
-    popupContent: {
-        flex: 1,
-        justifyContent: 'center',
-    },
-
-    popupContainer: {
-        height: 350,
-    },
-
-    titleText: {
-        color: ColorConstant.Text.Black.Normal,
     },
 });

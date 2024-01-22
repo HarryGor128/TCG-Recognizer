@@ -1,6 +1,7 @@
 import { createStackNavigator } from '@react-navigation/stack';
 
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
+import ARViewScreen from '../ARView/ARView';
 import GoogleResultScreen from '../GoogleResult/GoogleResultScreen';
 import InitializationScreen from '../Initialization/Initialization';
 import ScanningScreen from '../Scanning/ScanningScreen';
@@ -24,6 +25,7 @@ const MainStack = () => {
                 name={'GoogleResult'}
                 component={GoogleResultScreen}
             />
+            <Stack.Screen name={'ARView'} component={ARViewScreen} />
         </Stack.Navigator>
     );
 };
