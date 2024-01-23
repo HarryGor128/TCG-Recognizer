@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import {
     Keyboard,
     Modal,
@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import ColorConstant from '../../../Constant/ColorConstant';
+import useAndroidBackButton from '../../../Hook/Common/useAndroidBackButton';
 import { useAppSelector } from '../../../store/storeHooks';
 import AppIcon, { AppIconProps } from '../AppIcon/AppIconRenderer';
 import AppPopupContext, {
@@ -38,6 +39,8 @@ interface Props {
  * @param setPopupTitleStyles: Function; // Set Popup title styles
  * @param titleIcon?: AppIconProps; // Title icon
  * @param setTitleIcon: Function; // Set title icon
+ * @param onPressAndroidBack?: Function; // When user press android back button
+ * @param setOnPressAndroidBack: Function; // Set when user press android back button
  */
 const AppPopup = ({ children }: Props) => {
     const { isKeyboardShow } = useAppSelector((state) => state.appState);
@@ -53,6 +56,9 @@ const AppPopup = ({ children }: Props) => {
         StyleProp<TextStyle> | undefined
     >();
     const [titleIcon, setTitleIcon] = useState<AppIconProps | undefined>();
+    const [onPressAndroidBack, setOnPressAndroidBack] = useState<
+        Function | undefined
+    >();
 
     const value: AppPopupContextType = {
         isShowPopup,
@@ -69,6 +75,8 @@ const AppPopup = ({ children }: Props) => {
         setPopupTitleStyles,
         titleIcon,
         setTitleIcon,
+        onPressAndroidBack,
+        setOnPressAndroidBack,
     };
 
     const onPressBackground = () => {
@@ -81,6 +89,25 @@ const AppPopup = ({ children }: Props) => {
             setShowPopup(false);
         }
     };
+
+    const closePopup = () => {
+        setShowPopup(false);
+    };
+
+    useAndroidBackButton(onPressAndroidBack ? onPressAndroidBack : closePopup);
+
+    // Clean props when popup close
+    useEffect(() => {
+        if (!isShowPopup) {
+            setPopupContent(<></>);
+            setOnClosePopup(() => {});
+            setPopupContainerStyles({});
+            setPopupTitle(undefined);
+            setPopupTitleStyles(undefined);
+            setTitleIcon(undefined);
+            setOnPressAndroidBack(undefined);
+        }
+    }, [isShowPopup]);
 
     return (
         <AppPopupContext.Provider value={value}>

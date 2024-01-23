@@ -18,6 +18,8 @@ export type AppPopupContextType = {
     setPopupTitleStyles: Function; // Set Popup title styles
     titleIcon?: AppIconProps; // Title icon
     setTitleIcon: Function; // Set title icon
+    onPressAndroidBack?: Function; // When user press android back button
+    setOnPressAndroidBack: Function; // Set when user press android back button
 };
 
 const defaultAppPopupContext: AppPopupContextType = {
@@ -35,6 +37,8 @@ const defaultAppPopupContext: AppPopupContextType = {
     setPopupTitleStyles: () => {},
     titleIcon: undefined,
     setTitleIcon: () => {},
+    onPressAndroidBack: () => {},
+    setOnPressAndroidBack: () => {},
 };
 
 const AppPopupContext = createContext(defaultAppPopupContext);
@@ -54,5 +58,7 @@ const AppPopupContext = createContext(defaultAppPopupContext);
  * @param setPopupTitleStyles: Function; // Set Popup title styles
  * @param titleIcon?: AppIconProps; // Title icon
  * @param setTitleIcon: Function; // Set title icon
+ * @param onPressAndroidBack?: Function; // When user press android back button
+ * @param setOnPressAndroidBack: Function; // Set when user press android back button
  */
 export default AppPopupContext;

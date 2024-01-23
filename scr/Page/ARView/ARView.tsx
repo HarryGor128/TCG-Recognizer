@@ -1,17 +1,15 @@
 import { StyleSheet, View } from 'react-native';
 
-import { NavigationProp } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
 import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
 import ColorConstant from '../../Constant/ColorConstant';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 
-type ARViewScreenProps = {
-    navigation: NavigationProp<ScreenParamList>;
-};
+type NavigationProps = NativeStackScreenProps<ScreenParamList, 'ARView'>;
 
-const ARViewScreen = ({ navigation }: ARViewScreenProps) => {
+const ARViewScreen = ({ navigation }: NavigationProps) => {
     return (
         <View style={ARViewStyles.mainContainer}>
             <AppHeader

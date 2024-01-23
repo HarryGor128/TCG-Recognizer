@@ -1,6 +1,7 @@
+import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { NavigationProp } from '@react-navigation/native';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import CustomButton from '../../Components/Common/CustomButton/CustomButton';
 import ColorConstant from '../../Constant/ColorConstant';
@@ -8,14 +9,20 @@ import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import useCameraAlbum from '../../Hook/Common/useCameraAlbum';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 
-type StartOptionScreenProps = {
-    navigation: NavigationProp<ScreenParamList>;
-};
+type NavigationProps = NativeStackScreenProps<ScreenParamList, 'StartOption'>;
 
-const StartOptionScreen = ({ navigation }: StartOptionScreenProps) => {
+const StartOptionScreen = ({ navigation }: NavigationProps) => {
     useAndroidBackButton();
 
-    const { openUploadPopup } = useCameraAlbum();
+    const { openUploadPopup, photo } = useCameraAlbum();
+
+    useEffect(() => {
+        if (photo?.base64 !== undefined) {
+            navigation.navigate('GoogleResult', {
+                ScanningResult: photo.base64,
+            });
+        }
+    }, [photo]);
 
     const onPressScanning = () => {
         openUploadPopup();

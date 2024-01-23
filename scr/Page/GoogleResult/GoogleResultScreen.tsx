@@ -9,6 +9,8 @@ import {
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
+import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
+import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import GoogleVisionService from '../../Services/GoogleVisionService';
 import GoogleVisionAIImageTextResult from '../../Type/GoogleVision/GoogleVisionAIImageTextResult';
@@ -69,6 +71,10 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
 
     return (
         <View style={GoogleResultScreenStyles.mainContainer}>
+            <AppHeader
+                LeftStack={<AppHeaderBackButton navigation={navigation} />}
+                Title={'Result'}
+            />
             <FlatList
                 data={textList}
                 renderItem={resultRenderer}
