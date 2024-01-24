@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 
 import ColorConstant from '../../../Constant/ColorConstant';
+import FontSizeConstant from '../../../Constant/FontSizeConstant';
 import useAndroidBackButton from '../../../Hook/Common/useAndroidBackButton';
 import { useAppSelector } from '../../../store/storeHooks';
 import AppIcon, { AppIconProps } from '../AppIcon/AppIconRenderer';
@@ -91,10 +92,13 @@ const AppPopup = ({ children }: Props) => {
     };
 
     const closePopup = () => {
+        console.log('Close popup');
         setShowPopup(false);
     };
 
-    useAndroidBackButton(onPressAndroidBack ? onPressAndroidBack : closePopup);
+    useAndroidBackButton(
+        onPressAndroidBack ? onPressAndroidBack() : closePopup(),
+    );
 
     // Clean props when popup close
     useEffect(() => {
@@ -164,7 +168,10 @@ const AppPopupStyles = StyleSheet.create({
         backgroundColor: ColorConstant.BG.White.Normal,
     },
 
-    title: {},
+    title: {
+        fontSize: FontSizeConstant.large,
+        color: ColorConstant.Text.Blue.Deep,
+    },
 
     titleContainer: {
         flexDirection: 'row',

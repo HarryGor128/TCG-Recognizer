@@ -37,7 +37,7 @@ const defaultAppPopupContext: AppPopupContextType = {
     setPopupTitleStyles: () => {},
     titleIcon: undefined,
     setTitleIcon: () => {},
-    onPressAndroidBack: () => {},
+    onPressAndroidBack: undefined,
     setOnPressAndroidBack: () => {},
 };
 

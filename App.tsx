@@ -1,3 +1,4 @@
+import { Text } from 'react-native';
 import 'react-native-devsettings';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Provider } from 'react-redux';
@@ -13,7 +14,16 @@ import { store } from './scr/store/store';
 
 library.add(fab, far, fas);
 
+interface TextWithDefaultProps extends Text {
+    defaultProps?: { allowFontScaling?: boolean };
+}
+
 const App = () => {
+    (Text as unknown as TextWithDefaultProps).defaultProps =
+        (Text as unknown as TextWithDefaultProps).defaultProps || {};
+    (Text as unknown as TextWithDefaultProps).defaultProps!.allowFontScaling =
+        false;
+
     return (
         <Provider store={store}>
             <GestureHandlerRootView style={{ flex: 1 }}>
