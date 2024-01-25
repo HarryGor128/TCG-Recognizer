@@ -29,6 +29,7 @@
         "@reduxjs/toolkit": "^1.9.5",
         "axios": "^1.5.0",
         "moment": "^2.29.4",
+        "node-html-parser": "^6.1.12",
         "patch-package": "^8.0.0",
         "react": "18.2.0",
         "react-native": "0.72.4",

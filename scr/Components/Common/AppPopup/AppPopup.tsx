@@ -13,7 +13,6 @@ import {
 
 import ColorConstant from '../../../Constant/ColorConstant';
 import FontSizeConstant from '../../../Constant/FontSizeConstant';
-import useAndroidBackButton from '../../../Hook/Common/useAndroidBackButton';
 import { useAppSelector } from '../../../store/storeHooks';
 import AppIcon, { AppIconProps } from '../AppIcon/AppIconRenderer';
 import AppPopupContext, {
@@ -59,7 +58,7 @@ const AppPopup = ({ children }: Props) => {
     const [titleIcon, setTitleIcon] = useState<AppIconProps | undefined>();
     const [onPressAndroidBack, setOnPressAndroidBack] = useState<
         Function | undefined
-    >();
+    >(undefined);
 
     const value: AppPopupContextType = {
         isShowPopup,
@@ -90,15 +89,6 @@ const AppPopup = ({ children }: Props) => {
             setShowPopup(false);
         }
     };
-
-    const closePopup = () => {
-        console.log('Close popup');
-        setShowPopup(false);
-    };
-
-    useAndroidBackButton(
-        onPressAndroidBack ? onPressAndroidBack() : closePopup(),
-    );
 
     // Clean props when popup close
     useEffect(() => {

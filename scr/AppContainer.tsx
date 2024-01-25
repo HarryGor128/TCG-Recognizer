@@ -8,10 +8,13 @@ import MainStack from './Page/Stack/MainStack';
 
 import { useAppSelector } from './store/storeHooks';
 
+import useAxiosInterceptors from './Hook/Common/useAxiosInterceptors';
 import useKeyboardStatus from './Hook/Common/useKeyboardStatus';
 
 const AppContainer = () => {
     useKeyboardStatus();
+
+    useAxiosInterceptors();
 
     const appState = useAppSelector((state) => state.appState);
 

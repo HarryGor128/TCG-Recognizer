@@ -22,6 +22,7 @@ const useCameraAlbum = () => {
         const result = await mediaService.SelectPhoto();
         if (result) {
             setPhoto(result);
+            setShowPopup(false);
         }
     };
 
@@ -29,6 +30,7 @@ const useCameraAlbum = () => {
         const result = await mediaService.TakePhoto();
         if (result) {
             setPhoto(result);
+            setShowPopup(false);
         }
     };
 

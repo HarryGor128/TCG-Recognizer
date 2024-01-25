@@ -1,5 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+import ColorConstant from '../../../Constant/ColorConstant';
+import FontSizeConstant from '../../../Constant/FontSizeConstant';
+
 interface AppHeaderProps {
     LeftStack?: React.ReactNode; // Header left element
     RightStack?: React.ReactNode; // Header right element
@@ -44,18 +47,28 @@ const AppHeader = ({
                 },
             ]}
         >
-            {LeftStack && !HeaderLeft && LeftStack}
-            <Text
-                style={[
-                    styles.HeaderTitleText,
-                    HeaderBold && { fontWeight: 'bold' },
-                    HeaderTextColor !== undefined && { color: HeaderTextColor },
-                    HeaderTextSize !== 0 && { fontSize: HeaderTextSize },
-                ]}
-            >
-                {Title}
-            </Text>
-            {RightStack && !HeaderRight && RightStack}
+            <View style={styles.LeftStackContainer}>
+                {LeftStack && !HeaderLeft && LeftStack}
+            </View>
+            <View style={styles.HeaderTitleContainer}>
+                <Text
+                    style={[
+                        styles.HeaderTitleText,
+                        HeaderBold && { fontWeight: 'bold' },
+                        HeaderTextColor !== undefined && {
+                            color: HeaderTextColor,
+                        },
+                        HeaderTextSize !== undefined && {
+                            fontSize: HeaderTextSize,
+                        },
+                    ]}
+                >
+                    {Title}
+                </Text>
+            </View>
+            <View style={styles.RightStackContainer}>
+                {RightStack && !HeaderRight && RightStack}
+            </View>
         </View>
     );
 };
@@ -69,12 +82,32 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
+        backgroundColor: ColorConstant.BG.Blue.Bright,
+    },
+
+    HeaderTitleContainer: {
+        flex: 1,
+        marginHorizontal: 10,
+        maxWidth: '50%',
+        justifyContent: 'center',
     },
 
     HeaderTitleText: {
-        flex: 1,
-        maxWidth: '50%',
+        fontSize: FontSizeConstant.large,
+        color: ColorConstant.Text.Blue.Deep,
         textAlign: 'center',
         textAlignVertical: 'center',
+    },
+
+    LeftStackContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+    },
+
+    RightStackContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
     },
 });

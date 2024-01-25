@@ -4,6 +4,7 @@ import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 import ARViewScreen from '../ARView/ARView';
 import GoogleResultScreen from '../GoogleResult/GoogleResultScreen';
 import InitializationScreen from '../Initialization/Initialization';
+import MarketResult from '../MarketResult/MarketResult';
 import StartOptionScreen from '../StartOption/StartOptionScreen';
 
 const Stack = createStackNavigator<ScreenParamList>();
@@ -23,6 +24,7 @@ const MainStack = () => {
                 name={'GoogleResult'}
                 component={GoogleResultScreen}
             />
+            <Stack.Screen name={'MarketResult'} component={MarketResult} />
             <Stack.Screen name={'ARView'} component={ARViewScreen} />
         </Stack.Navigator>
     );

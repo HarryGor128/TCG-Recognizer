@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {
     FlatList,
+    Image,
     StyleSheet,
     Text,
     TouchableOpacity,
@@ -11,6 +12,8 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
 import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
+import ColorConstant from '../../Constant/ColorConstant';
+import FontSizeConstant from '../../Constant/FontSizeConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import GoogleVisionService from '../../Services/GoogleVisionService';
 import GoogleVisionAIImageTextResult from '../../Type/GoogleVision/GoogleVisionAIImageTextResult';
@@ -40,7 +43,7 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
         dispatch(openLoader());
 
         const result = await GoogleVisionService.VisionImageTextSearch(
-            ScanningResult,
+            ScanningResult.split('base64,')[1],
         );
         setImageResult(result);
 
@@ -57,10 +60,14 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
     }, []);
 
     const resultRenderer = ({ item }: { item: string }) => {
+        const onPressResult = () => {
+            navigation.navigate('MarketResult', { SearchString: item });
+        };
+
         return (
             <TouchableOpacity
                 style={GoogleResultScreenStyles.resultItem}
-                onPress={() => {}}
+                onPress={onPressResult}
             >
                 <Text style={GoogleResultScreenStyles.resultItemText}>
                     {item}
@@ -70,17 +77,30 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
     };
 
     return (
-        <View style={GoogleResultScreenStyles.mainContainer}>
+        <>
             <AppHeader
                 LeftStack={<AppHeaderBackButton navigation={navigation} />}
                 Title={'Result'}
             />
-            <FlatList
-                data={textList}
-                renderItem={resultRenderer}
-                keyExtractor={(item, index) => index.toString()}
-            />
-        </View>
+            <View style={GoogleResultScreenStyles.mainContainer}>
+                <Image
+                    source={{ uri: ScanningResult }}
+                    style={GoogleResultScreenStyles.uploadImage}
+                    resizeMode={'contain'}
+                />
+                {textList.length > 0 ? (
+                    <FlatList
+                        data={textList}
+                        renderItem={resultRenderer}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                ) : (
+                    <Text style={GoogleResultScreenStyles.noResult}>
+                        {'No result'}
+                    </Text>
+                )}
+            </View>
+        </>
     );
 };
 
@@ -92,13 +112,27 @@ const GoogleResultScreenStyles = StyleSheet.create({
         padding: 10,
     },
 
+    uploadImage: {
+        height: '30%',
+        marginBottom: 20,
+    },
+
     resultItem: {
         flex: 1,
         padding: 10,
+        borderRadius: 10,
         marginVertical: 10,
+        backgroundColor: ColorConstant.BG.Blue.Bright,
     },
 
     resultItemText: {
         color: 'black',
+    },
+
+    noResult: {
+        fontSize: FontSizeConstant.middle,
+        color: ColorConstant.Text.Blue.Deep,
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
 });

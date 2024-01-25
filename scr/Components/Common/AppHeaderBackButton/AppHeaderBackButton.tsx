@@ -35,7 +35,6 @@ const AppHeaderBackButton = ({
     return (
         <CustomButton
             OnPressCallback={OnPressBack}
-            ButtonText={''}
             Icon={['fas', 'chevron-left']}
             IconSize={30}
         />

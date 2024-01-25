@@ -224,6 +224,15 @@ const commonService = {
     sleep(ms: number): Promise<any> {
         return new Promise((resolve) => setTimeout(resolve, ms));
     },
+
+    /**
+     *
+     * @param numString Number of string
+     * @returns number
+     */
+    stringToFloat(numString: string): number {
+        return parseFloat(numString.replace(/[^0-9]/g, ''));
+    },
 };
 
 export default commonService;

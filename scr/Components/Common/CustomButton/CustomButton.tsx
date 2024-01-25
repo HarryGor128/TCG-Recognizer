@@ -17,7 +17,7 @@ import IconConstant from '../../../Constant/IconConstant';
 
 export interface CustomButtonProps {
     OnPressCallback: Function; // Trigger function callback when press button
-    ButtonText: string; // Button display text
+    ButtonText?: string; // Button display text
     Disabled?: boolean; // Is button disable
     Icon?: IconProp; // Button display icon (using FontAwesomeIcon, need pass IconProp object from '@fortawesome/fontawesome-svg-core')
     IconSize?: number; // Icon size
@@ -52,7 +52,7 @@ const IconRenderer = (props: CustomButtonProps) => {
 
 /**
  * @param OnPressCallback: Function; // Trigger function callback when press button
- * @param ButtonText: string; // Button display text
+ * @param ButtonText?: string; // Button display text
  * @param Disabled?: boolean; // Is button disable
  * @param Icon?: IconProp; // Button display icon (using FontAwesomeIcon, need pass IconProp object from '@fortawesome/fontawesome-svg-core')
  * @param IconSize?: number; // Icon size
@@ -93,19 +93,21 @@ const CustomButton = (props: CustomButtonProps) => {
             >
                 <View style={ButtonStyle.ContentContainer}>
                     {!IconOnRight && <IconRenderer {...props} />}
-                    <Text
-                        style={[
-                            ButtonStyle.ButtonText,
-                            {
-                                color: Disabled
-                                    ? ColorConstant.Text.Grey.Dark
-                                    : ColorConstant.Text.Blue.Deep,
-                            },
-                            ButtonTextStyle,
-                        ]}
-                    >
-                        {ButtonText}
-                    </Text>
+                    {ButtonText && (
+                        <Text
+                            style={[
+                                ButtonStyle.ButtonText,
+                                {
+                                    color: Disabled
+                                        ? ColorConstant.Text.Grey.Dark
+                                        : ColorConstant.Text.Blue.Deep,
+                                },
+                                ButtonTextStyle,
+                            ]}
+                        >
+                            {ButtonText}
+                        </Text>
+                    )}
                     {IconOnRight && <IconRenderer {...props} />}
                 </View>
             </TouchableOpacity>
@@ -130,7 +132,7 @@ const ButtonStyle = StyleSheet.create({
     },
 
     ButtonText: {
-        fontSize: FontSizeConstant.large,
+        fontSize: FontSizeConstant.middle,
         marginHorizontal: 10,
     },
 });

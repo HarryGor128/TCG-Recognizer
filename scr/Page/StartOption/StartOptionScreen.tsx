@@ -12,9 +12,9 @@ import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 type NavigationProps = NativeStackScreenProps<ScreenParamList, 'StartOption'>;
 
 const StartOptionScreen = ({ navigation }: NavigationProps) => {
-    useAndroidBackButton();
-
     const { openUploadPopup, photo } = useCameraAlbum();
+
+    useAndroidBackButton();
 
     useEffect(() => {
         if (photo?.base64 !== undefined) {
