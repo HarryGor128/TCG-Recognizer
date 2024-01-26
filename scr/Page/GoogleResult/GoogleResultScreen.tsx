@@ -16,7 +16,6 @@ import ColorConstant from '../../Constant/ColorConstant';
 import FontSizeConstant from '../../Constant/FontSizeConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import GoogleVisionService from '../../Services/GoogleVisionService';
-import GoogleVisionAIImageTextResult from '../../Type/GoogleVision/GoogleVisionAIImageTextResult';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 import { closeLoader, openLoader } from '../../store/reducer/appStateSlice';
 import { useAppDispatch } from '../../store/storeHooks';
@@ -25,11 +24,6 @@ type NavigationProps = NativeStackScreenProps<ScreenParamList, 'GoogleResult'>;
 
 const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
     const { ScanningResult } = route.params;
-
-    const [imageResult, setImageResult] =
-        useState<GoogleVisionAIImageTextResult>(
-            new GoogleVisionAIImageTextResult(),
-        );
 
     const [textList, setTextList] = useState<string[]>([]);
 
@@ -45,7 +39,6 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
         const result = await GoogleVisionService.VisionImageTextSearch(
             ScanningResult.split('base64,')[1],
         );
-        setImageResult(result);
 
         if (result.responses[0].fullTextAnnotation) {
             const annotationText = result.responses[0].fullTextAnnotation.text;
@@ -109,18 +102,18 @@ export default GoogleResultScreen;
 const GoogleResultScreenStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        padding: 10,
     },
 
     uploadImage: {
         height: '30%',
-        marginBottom: 20,
+        margin: 20,
     },
 
     resultItem: {
         flex: 1,
         padding: 10,
         borderRadius: 10,
+        marginHorizontal: 20,
         marginVertical: 10,
         backgroundColor: ColorConstant.BG.Blue.Bright,
     },
