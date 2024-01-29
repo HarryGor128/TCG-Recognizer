@@ -1,5 +1,6 @@
 import { NavigationProp } from '@react-navigation/native';
 
+import ColorConstant from '../../../Constant/ColorConstant';
 import ScreenParamList from '../../../Type/Navigation/ScreenParamList';
 import CustomButton from '../CustomButton/CustomButton';
 
@@ -37,6 +38,10 @@ const AppHeaderBackButton = ({
             OnPressCallback={OnPressBack}
             Icon={['fas', 'chevron-left']}
             IconSize={30}
+            ButtonContainerStyle={{
+                padding: 0,
+                backgroundColor: ColorConstant.Transparent.Clear,
+            }}
         />
     );
 };

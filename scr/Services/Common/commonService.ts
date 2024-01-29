@@ -233,6 +233,23 @@ const commonService = {
     stringToFloat(numString: string): number {
         return parseFloat(numString.replace(/[^0-9]/g, ''));
     },
+
+    /**
+     *
+     * @param amount Price number
+     * @param toFixed Default round amount to two decimal places
+     * @param cur Currency unit default empty string
+     * @returns Transformed Price
+     */
+    formatCurrency: function (
+        amount: number,
+        toFixed: number = 2,
+        cur: string = '',
+    ): string {
+        return `$${amount
+            .toFixed(toFixed)
+            .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} ${cur}`;
+    },
 };
 
 export default commonService;

@@ -1,22 +1,12 @@
-class MarketResultItem {
-    cardName: string;
-    image: string;
-    price: number;
-
-    constructor() {
-        this.cardName = '';
-        this.image = '';
-        this.price = 0;
-    }
-}
+import MarketResultItem from './MarketResultItem';
 
 class MarketResultList {
-    header: string;
-    item: MarketResultItem[];
+    title: string;
+    data: MarketResultItem[];
 
     constructor() {
-        this.header = '';
-        this.item = [] as MarketResultItem[];
+        this.title = '';
+        this.data = [] as MarketResultItem[];
     }
 }
 

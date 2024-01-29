@@ -7,6 +7,29 @@ import YuyuteiResult from '../Type/Market/Yuyutei/YuyuteiResult';
 import commonService from './Common/commonService';
 
 const MarketService = {
+    async getCurrencyExchangeRate(
+        foreign: string,
+        to: string = 'hkd',
+    ): Promise<number> {
+        try {
+            const result = await axios.get(
+                `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${foreign}/${to}.json`,
+            );
+            console.log(
+                '🚀 ~ file: MarketService.ts:15 ~ getCurrencyExchange ~ result:',
+                result.data,
+            );
+
+            return result.data[to];
+        } catch (error: any) {
+            console.log(
+                '🚀 ~ file: MarketService.ts:19 ~ getCurrencyExchange ~ error:',
+                error,
+            );
+            return Promise.resolve(0);
+        }
+    },
+
     async YuyuteiSearch(cardName: string): Promise<YuyuteiResult[]> {
         try {
             const result = await axios.get(
@@ -38,6 +61,11 @@ const MarketService = {
                     const price =
                         item.getElementsByTagName('strong')[0].textContent;
                     cardData.price = commonService.stringToFloat(price);
+
+                    const url = item
+                        .getElementsByTagName('a')[0]
+                        .getAttribute('href');
+                    cardData.url = url ? url : '';
 
                     data.CardList.push(cardData);
                 });

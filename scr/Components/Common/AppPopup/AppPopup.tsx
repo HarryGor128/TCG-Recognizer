@@ -116,8 +116,9 @@ const AppPopup = ({ children }: Props) => {
                             popupContainerStyles && { flex: undefined },
                             popupContainerStyles,
                         ]}
-                        pointerEvents={'box-none'}
-                        onStartShouldSetResponder={() => true}
+                        onStartShouldSetResponder={() => {
+                            return true;
+                        }}
                     >
                         {popupTitle && (
                             <View style={AppPopupStyles.titleContainer}>

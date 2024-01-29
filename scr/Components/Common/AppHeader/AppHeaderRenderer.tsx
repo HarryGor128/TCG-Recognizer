@@ -62,6 +62,7 @@ const AppHeader = ({
                             fontSize: HeaderTextSize,
                         },
                     ]}
+                    ellipsizeMode={'tail'}
                 >
                     {Title}
                 </Text>
@@ -102,12 +103,16 @@ const styles = StyleSheet.create({
     LeftStackContainer: {
         flex: 1,
         flexDirection: 'row',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
         justifyContent: 'flex-start',
     },
 
     RightStackContainer: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'flex-start',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        justifyContent: 'flex-end',
     },
 });
