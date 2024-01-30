@@ -243,8 +243,8 @@ const commonService = {
      */
     formatCurrency: function (
         amount: number,
-        toFixed: number = 2,
         cur: string = '',
+        toFixed: number = 2,
     ): string {
         return `$${amount
             .toFixed(toFixed)

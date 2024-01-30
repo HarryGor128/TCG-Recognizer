@@ -3,7 +3,6 @@ import {
     Image,
     Linking,
     ScrollView,
-    SectionList,
     StyleSheet,
     TouchableOpacity,
     View,
@@ -115,59 +114,131 @@ const MarketResult = ({
         dispatch(closeLoader());
     };
 
-    const calExchange = (price: number): number => {
-        return price * exchangeRate;
-    };
-
     useEffect(() => {
         getData();
     }, []);
 
-    const sectionHeader = (title: string) => {
-        return (
-            <View style={MarketResultStyles.sectionHeader}>
-                <TextComponent>{title}</TextComponent>
-            </View>
-        );
-    };
+    const listRenderer = (data: MarketResultList[], logo: any) => {
+        const calExchange = (price: number): number => {
+            return price * exchangeRate;
+        };
 
-    const itemRenderer = (item: MarketResultItem) => {
-        const onPress = () => {
-            if (item.webUrl.length > 0) {
-                Linking.openURL(item.webUrl);
-            }
+        const findMaxMinPrice = (
+            item: MarketResultItem[],
+        ): { max: number; min: number } => {
+            const price = item.map((row) => row.price);
+
+            const max = Math.max(...price);
+            const min = Math.min(...price);
+
+            return { max, min };
+        };
+
+        const concatAllItem = (): MarketResultItem[] => {
+            let itemList: MarketResultItem[] = [];
+
+            data.forEach((item) => {
+                itemList = itemList.concat(item.data);
+            });
+
+            return itemList;
+        };
+
+        const marketLogoRenderer = () => {
+            const { max, min } = findMaxMinPrice(concatAllItem());
+
+            return (
+                <>
+                    <View style={MarketResultStyles.marketLogo}>
+                        <Image source={logo} resizeMode={'contain'} />
+                    </View>
+                    <TextComponent
+                        style={{
+                            textAlign: 'center',
+                            marginBottom: 10,
+                            marginHorizontal: 20,
+                        }}
+                    >{`Highest price ~ Lowest price:\n${commonService.formatCurrency(
+                        max,
+                        data[0].data[0].cur,
+                    )} ~ ${commonService.formatCurrency(
+                        min,
+                        data[0].data[0].cur,
+                    )}`}</TextComponent>
+                </>
+            );
+        };
+
+        const sectionHeader = (title: string, item: MarketResultItem[]) => {
+            const { max, min } = findMaxMinPrice(item);
+
+            return (
+                <View style={MarketResultStyles.sectionHeader}>
+                    <TextComponent>{title}</TextComponent>
+                    {item.length > 1 && max !== min && (
+                        <TextComponent
+                            style={{ textAlign: 'right' }}
+                        >{`${commonService.formatCurrency(
+                            max,
+                            item[0].cur,
+                        )}\n~\n${commonService.formatCurrency(
+                            min,
+                            item[0].cur,
+                        )}`}</TextComponent>
+                    )}
+                </View>
+            );
+        };
+
+        const itemRenderer = (item: MarketResultItem) => {
+            const onPress = () => {
+                if (item.webUrl.length > 0) {
+                    Linking.openURL(item.webUrl);
+                }
+            };
+
+            return (
+                <TouchableOpacity
+                    onPress={onPress}
+                    style={MarketResultStyles.sectionItem}
+                >
+                    <Image
+                        source={{ uri: item.image }}
+                        resizeMode={'contain'}
+                        style={MarketResultStyles.itemImg}
+                    />
+                    <View style={MarketResultStyles.detail}>
+                        <TextComponent>{item.cardName}</TextComponent>
+                        <TextComponent>
+                            {commonService.formatCurrency(item.price, item.cur)}
+                        </TextComponent>
+                        <TextComponent>{`≈ ${commonService.formatCurrency(
+                            calExchange(item.price),
+                            'HKD',
+                        )}`}</TextComponent>
+                    </View>
+                </TouchableOpacity>
+            );
         };
 
         return (
-            <TouchableOpacity
-                onPress={onPress}
-                style={MarketResultStyles.sectionItem}
-            >
-                <Image
-                    source={{ uri: item.image }}
-                    resizeMode={'contain'}
-                    style={MarketResultStyles.itemImg}
-                />
-                <View style={MarketResultStyles.detail}>
-                    <TextComponent>{item.cardName}</TextComponent>
-                    <TextComponent>
-                        {commonService.formatCurrency(item.price, 2, item.cur)}
-                    </TextComponent>
-                    <TextComponent>{`≈ ${commonService.formatCurrency(
-                        calExchange(item.price),
-                        2,
-                        'HKD',
-                    )}`}</TextComponent>
-                </View>
-            </TouchableOpacity>
-        );
-    };
-
-    const marketRenderer = (logo: any) => {
-        return (
-            <View style={MarketResultStyles.marketLogo}>
-                <Image source={logo} resizeMode={'contain'} />
-            </View>
+            <>
+                {marketLogoRenderer()}
+                {data.map((item, index) => {
+                    return (
+                        <View key={index}>
+                            {sectionHeader(item.title, item.data)}
+                            {item.data.map((listItem, itemIndex) => {
+                                return (
+                                    <View key={itemIndex}>
+                                        {itemRenderer(listItem)}
+                                    </View>
+                                );
+                            })}
+                        </View>
+                    );
+                })}
+            </>
         );
     };
 
@@ -178,24 +249,11 @@ const MarketResult = ({
                 Title={SearchString}
             />
             <ScrollView style={MarketResultStyles.mainContainer}>
-                {marketRenderer(require('../Assets/Market/YYTLogo.png'))}
-                <SectionList
-                    sections={yytList}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item }) => itemRenderer(item)}
-                    renderSectionHeader={({ section: { title } }) =>
-                        sectionHeader(title)
-                    }
-                />
-                {marketRenderer(require('../Assets/Market/BigWebLogo.png'))}
-                <SectionList
-                    sections={bigWebList}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item }) => itemRenderer(item)}
-                    renderSectionHeader={({ section: { title } }) =>
-                        sectionHeader(title)
-                    }
-                />
+                {listRenderer(yytList, require('../Assets/Market/YYTLogo.png'))}
+                {listRenderer(
+                    bigWebList,
+                    require('../Assets/Market/BigWebLogo.png'),
+                )}
             </ScrollView>
         </>
     );
@@ -227,6 +285,7 @@ const MarketResultStyles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
         padding: 10,
         backgroundColor: ColorConstant.BG.Blue.Bright,
     },
