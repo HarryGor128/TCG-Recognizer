@@ -12,6 +12,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
 import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
+import TextComponent from '../../Components/Common/TextComponent/TextComponent';
 import ColorConstant from '../../Constant/ColorConstant';
 import FontSizeConstant from '../../Constant/FontSizeConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
@@ -62,9 +63,9 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
                 style={GoogleResultScreenStyles.resultItem}
                 onPress={onPressResult}
             >
-                <Text style={GoogleResultScreenStyles.resultItemText}>
+                <TextComponent style={GoogleResultScreenStyles.resultItemText}>
                     {item}
-                </Text>
+                </TextComponent>
             </TouchableOpacity>
         );
     };
@@ -88,9 +89,9 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
                         keyExtractor={(item, index) => index.toString()}
                     />
                 ) : (
-                    <Text style={GoogleResultScreenStyles.noResult}>
+                    <TextComponent style={GoogleResultScreenStyles.noResult}>
                         {'No result'}
-                    </Text>
+                    </TextComponent>
                 )}
             </View>
         </>

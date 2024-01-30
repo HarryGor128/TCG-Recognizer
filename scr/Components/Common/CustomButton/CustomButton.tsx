@@ -1,7 +1,6 @@
 import {
     StyleProp,
     StyleSheet,
-    Text,
     TextStyle,
     TouchableOpacity,
     View,
@@ -14,6 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 import ColorConstant from '../../../Constant/ColorConstant';
 import FontSizeConstant from '../../../Constant/FontSizeConstant';
 import IconConstant from '../../../Constant/IconConstant';
+import TextComponent from '../TextComponent/TextComponent';
 
 export interface CustomButtonProps {
     OnPressCallback: Function; // Trigger function callback when press button
@@ -94,7 +94,7 @@ const CustomButton = (props: CustomButtonProps) => {
                 <View style={ButtonStyle.ContentContainer}>
                     {!IconOnRight && <IconRenderer {...props} />}
                     {ButtonText && (
-                        <Text
+                        <TextComponent
                             style={[
                                 ButtonStyle.ButtonText,
                                 {
@@ -106,7 +106,7 @@ const CustomButton = (props: CustomButtonProps) => {
                             ]}
                         >
                             {ButtonText}
-                        </Text>
+                        </TextComponent>
                     )}
                     {IconOnRight && <IconRenderer {...props} />}
                 </View>

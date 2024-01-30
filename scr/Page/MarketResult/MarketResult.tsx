@@ -5,7 +5,6 @@ import {
     ScrollView,
     SectionList,
     StyleSheet,
-    Text,
     TouchableOpacity,
     View,
 } from 'react-native';
@@ -14,6 +13,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
 import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
+import TextComponent from '../../Components/Common/TextComponent/TextComponent';
 import ColorConstant from '../../Constant/ColorConstant';
 import commonService from '../../Services/Common/commonService';
 import MarketService from '../../Services/MarketService';
@@ -126,7 +126,7 @@ const MarketResult = ({
     const sectionHeader = (title: string) => {
         return (
             <View style={MarketResultStyles.sectionHeader}>
-                <Text>{title}</Text>
+                <TextComponent>{title}</TextComponent>
             </View>
         );
     };
@@ -149,15 +149,15 @@ const MarketResult = ({
                     style={MarketResultStyles.itemImg}
                 />
                 <View style={MarketResultStyles.detail}>
-                    <Text>{item.cardName}</Text>
-                    <Text>
+                    <TextComponent>{item.cardName}</TextComponent>
+                    <TextComponent>
                         {commonService.formatCurrency(item.price, 2, item.cur)}
-                    </Text>
-                    <Text>{`≈ ${commonService.formatCurrency(
+                    </TextComponent>
+                    <TextComponent>{`≈ ${commonService.formatCurrency(
                         calExchange(item.price),
                         2,
                         'HKD',
-                    )}`}</Text>
+                    )}`}</TextComponent>
                 </View>
             </TouchableOpacity>
         );

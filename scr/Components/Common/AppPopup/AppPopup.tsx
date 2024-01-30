@@ -4,7 +4,6 @@ import {
     Modal,
     StyleProp,
     StyleSheet,
-    Text,
     TextStyle,
     TouchableOpacity,
     View,
@@ -15,6 +14,7 @@ import ColorConstant from '../../../Constant/ColorConstant';
 import FontSizeConstant from '../../../Constant/FontSizeConstant';
 import { useAppSelector } from '../../../store/storeHooks';
 import AppIcon, { AppIconProps } from '../AppIcon/AppIconRenderer';
+import TextComponent from '../TextComponent/TextComponent';
 import AppPopupContext, {
     AppPopupContextType,
 } from './Context/AppPopupContext';
@@ -123,14 +123,14 @@ const AppPopup = ({ children }: Props) => {
                         {popupTitle && (
                             <View style={AppPopupStyles.titleContainer}>
                                 {titleIcon && <AppIcon {...titleIcon} />}
-                                <Text
+                                <TextComponent
                                     style={[
                                         AppPopupStyles.title,
                                         popupTitleStyles,
                                     ]}
                                 >
                                     {popupTitle}
-                                </Text>
+                                </TextComponent>
                             </View>
                         )}
                         {popupContent}

@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import CustomButton from '../../Components/Common/CustomButton/CustomButton';
+import TextComponent from '../../Components/Common/TextComponent/TextComponent';
 import ColorConstant from '../../Constant/ColorConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import useCameraAlbum from '../../Hook/Common/useCameraAlbum';
@@ -35,7 +36,7 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
     return (
         <View style={StartOptionScreenStyles.mainContainer}>
             <View style={StartOptionScreenStyles.logoContainer}>
-                <Text>{'Logo'}</Text>
+                <TextComponent>{'Logo'}</TextComponent>
             </View>
             <View style={StartOptionScreenStyles.buttonContainer}>
                 <CustomButton

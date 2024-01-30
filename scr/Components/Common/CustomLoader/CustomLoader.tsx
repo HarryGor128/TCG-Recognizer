@@ -1,7 +1,8 @@
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 
 import ColorConstant from '../../../Constant/ColorConstant';
 import FontSizeConstant from '../../../Constant/FontSizeConstant';
+import TextComponent from '../TextComponent/TextComponent';
 
 export interface CustomLoaderProps {
     IsLoading: boolean;
@@ -14,9 +15,9 @@ const CustomLoader = ({ IsLoading, LoaderText }: CustomLoaderProps) => {
             {IsLoading && (
                 <View style={styles.MainContainer}>
                     <ActivityIndicator animating={IsLoading} size={'large'} />
-                    <Text style={styles.LoadingText}>
+                    <TextComponent style={styles.LoadingText}>
                         {LoaderText ? LoaderText : 'Loading'}
-                    </Text>
+                    </TextComponent>
                 </View>
             )}
         </>

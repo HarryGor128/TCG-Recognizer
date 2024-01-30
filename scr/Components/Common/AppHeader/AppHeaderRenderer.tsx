@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import ColorConstant from '../../../Constant/ColorConstant';
 import FontSizeConstant from '../../../Constant/FontSizeConstant';
+import TextComponent from '../TextComponent/TextComponent';
 
 interface AppHeaderProps {
     LeftStack?: React.ReactNode; // Header left element
@@ -51,7 +52,7 @@ const AppHeader = ({
                 {LeftStack && !HeaderLeft && LeftStack}
             </View>
             <View style={styles.HeaderTitleContainer}>
-                <Text
+                <TextComponent
                     style={[
                         styles.HeaderTitleText,
                         HeaderBold && { fontWeight: 'bold' },
@@ -65,7 +66,7 @@ const AppHeader = ({
                     ellipsizeMode={'tail'}
                 >
                     {Title}
-                </Text>
+                </TextComponent>
             </View>
             <View style={styles.RightStackContainer}>
                 {RightStack && !HeaderRight && RightStack}
