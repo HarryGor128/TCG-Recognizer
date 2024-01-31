@@ -128,8 +128,8 @@ const MarketResult = ({
         ): { max: number; min: number } => {
             const price = item.map((row) => row.price);
 
-            const max = Math.max(...price);
-            const min = Math.min(...price);
+            const max = price.length > 0 ? Math.max(...price) : 0;
+            const min = price.length > 0 ? Math.min(...price) : 0;
 
             return { max, min };
         };
@@ -160,10 +160,10 @@ const MarketResult = ({
                         }}
                     >{`Highest price ~ Lowest price:\n${commonService.formatCurrency(
                         max,
-                        data[0].data[0].cur,
+                        data[0] ? data[0].data[0].cur : '',
                     )} ~ ${commonService.formatCurrency(
                         min,
-                        data[0].data[0].cur,
+                        data[0] ? data[0].data[0].cur : '',
                     )}`}</TextComponent>
                 </>
             );
@@ -224,20 +224,26 @@ const MarketResult = ({
         return (
             <>
                 {marketLogoRenderer()}
-                {data.map((item, index) => {
-                    return (
-                        <View key={index}>
-                            {sectionHeader(item.title, item.data)}
-                            {item.data.map((listItem, itemIndex) => {
-                                return (
-                                    <View key={itemIndex}>
-                                        {itemRenderer(listItem)}
-                                    </View>
-                                );
-                            })}
-                        </View>
-                    );
-                })}
+                {data.length > 0 ? (
+                    data.map((item, index) => {
+                        return (
+                            <View key={index}>
+                                {sectionHeader(item.title, item.data)}
+                                {item.data.map((listItem, itemIndex) => {
+                                    return (
+                                        <View key={itemIndex}>
+                                            {itemRenderer(listItem)}
+                                        </View>
+                                    );
+                                })}
+                            </View>
+                        );
+                    })
+                ) : (
+                    <TextComponent style={MarketResultStyles.noResult}>
+                        {'No result'}
+                    </TextComponent>
+                )}
             </>
         );
     };
@@ -309,5 +315,10 @@ const MarketResultStyles = StyleSheet.create({
 
     detail: {
         marginLeft: 10,
+    },
+
+    noResult: {
+        textAlign: 'center',
+        textAlignVertical: 'center',
     },
 });

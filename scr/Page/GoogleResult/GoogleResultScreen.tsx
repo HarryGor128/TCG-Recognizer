@@ -3,7 +3,6 @@ import {
     FlatList,
     Image,
     StyleSheet,
-    Text,
     TouchableOpacity,
     View,
 } from 'react-native';
@@ -12,9 +11,9 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
 import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
+import SearchBar from '../../Components/Common/SearchBar/SearchBar';
 import TextComponent from '../../Components/Common/TextComponent/TextComponent';
 import ColorConstant from '../../Constant/ColorConstant';
-import FontSizeConstant from '../../Constant/FontSizeConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import GoogleVisionService from '../../Services/GoogleVisionService';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
@@ -27,6 +26,8 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
     const { ScanningResult } = route.params;
 
     const [textList, setTextList] = useState<string[]>([]);
+
+    const [searchText, setSearchText] = useState<string>('');
 
     const dispatch = useAppDispatch();
 
@@ -70,6 +71,10 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
         );
     };
 
+    const onSearchBarInput = (text: string) => {
+        setSearchText(text);
+    };
+
     return (
         <>
             <AppHeader
@@ -77,10 +82,18 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
                 Title={'Result'}
             />
             <View style={GoogleResultScreenStyles.mainContainer}>
-                <Image
+                {/* <Image
                     source={{ uri: ScanningResult }}
                     style={GoogleResultScreenStyles.uploadImage}
                     resizeMode={'contain'}
+                /> */}
+                <SearchBar
+                    onInput={onSearchBarInput}
+                    value={searchText}
+                    containerStyle={{
+                        marginHorizontal: 20,
+                        marginVertical: 10,
+                    }}
                 />
                 {textList.length > 0 ? (
                     <FlatList
@@ -124,8 +137,6 @@ const GoogleResultScreenStyles = StyleSheet.create({
     },
 
     noResult: {
-        fontSize: FontSizeConstant.middle,
-        color: ColorConstant.Text.Blue.Deep,
         textAlign: 'center',
         textAlignVertical: 'center',
     },

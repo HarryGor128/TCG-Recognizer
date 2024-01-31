@@ -1,11 +1,9 @@
 import { ReactNode, useEffect, useState } from 'react';
 import {
     Keyboard,
-    Modal,
     StyleProp,
     StyleSheet,
     TextStyle,
-    TouchableOpacity,
     View,
     ViewStyle,
 } from 'react-native';
@@ -14,6 +12,7 @@ import ColorConstant from '../../../Constant/ColorConstant';
 import FontSizeConstant from '../../../Constant/FontSizeConstant';
 import { useAppSelector } from '../../../store/storeHooks';
 import AppIcon, { AppIconProps } from '../AppIcon/AppIconRenderer';
+import AppPopupBase from '../AppPopupBase/AppPopupBase';
 import TextComponent from '../TextComponent/TextComponent';
 import AppPopupContext, {
     AppPopupContextType,
@@ -105,38 +104,33 @@ const AppPopup = ({ children }: Props) => {
 
     return (
         <AppPopupContext.Provider value={value}>
-            <Modal transparent animationType={'fade'} visible={isShowPopup}>
-                <TouchableOpacity
-                    onPress={onPressBackground}
-                    style={AppPopupStyles.BG}
+            <AppPopupBase
+                onPressBackground={onPressBackground}
+                isShowPopup={isShowPopup}
+            >
+                <View
+                    style={[
+                        AppPopupStyles.container,
+                        popupContainerStyles && { flex: undefined },
+                        popupContainerStyles,
+                    ]}
+                    onStartShouldSetResponder={() => {
+                        return true;
+                    }}
                 >
-                    <View
-                        style={[
-                            AppPopupStyles.container,
-                            popupContainerStyles && { flex: undefined },
-                            popupContainerStyles,
-                        ]}
-                        onStartShouldSetResponder={() => {
-                            return true;
-                        }}
-                    >
-                        {popupTitle && (
-                            <View style={AppPopupStyles.titleContainer}>
-                                {titleIcon && <AppIcon {...titleIcon} />}
-                                <TextComponent
-                                    style={[
-                                        AppPopupStyles.title,
-                                        popupTitleStyles,
-                                    ]}
-                                >
-                                    {popupTitle}
-                                </TextComponent>
-                            </View>
-                        )}
-                        {popupContent}
-                    </View>
-                </TouchableOpacity>
-            </Modal>
+                    {popupTitle && (
+                        <View style={AppPopupStyles.titleContainer}>
+                            {titleIcon && <AppIcon {...titleIcon} />}
+                            <TextComponent
+                                style={[AppPopupStyles.title, popupTitleStyles]}
+                            >
+                                {popupTitle}
+                            </TextComponent>
+                        </View>
+                    )}
+                    {popupContent}
+                </View>
+            </AppPopupBase>
             {children}
         </AppPopupContext.Provider>
     );
@@ -145,12 +139,6 @@ const AppPopup = ({ children }: Props) => {
 export default AppPopup;
 
 const AppPopupStyles = StyleSheet.create({
-    BG: {
-        flex: 1,
-        justifyContent: 'center',
-        backgroundColor: ColorConstant.Transparent.Black,
-    },
-
     container: {
         flex: 1,
         margin: 20,
