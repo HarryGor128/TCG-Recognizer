@@ -8,11 +8,14 @@ import {
 
 import ColorConstant from '../../../Constant/ColorConstant';
 import AppIcon, { AppIconProps } from '../AppIcon/AppIconRenderer';
+import CustomButton from '../CustomButton/CustomButton';
 import TextInputComponent from '../TextInputComponent/TextInputComponent';
 
 interface SearchBarProps {
     onInput: Function; // When user input on the search bar
     value: string; // The value of text input
+    isSearchButtonShow?: boolean; // Show search button
+    onSearchPress?: Function; // When user press search
     placeHolderText?: string; // Display search bar place holder
     placeHolderTextColor?: string; // Place holder text color
     Icon?: AppIconProps; // Set icon props
@@ -22,12 +25,14 @@ interface SearchBarProps {
 
 const SearchBar = ({
     onInput,
+    value,
+    isSearchButtonShow,
+    onSearchPress,
     placeHolderText,
     placeHolderTextColor,
     Icon,
     containerStyle,
     inputStyle,
-    value,
 }: SearchBarProps) => {
     return (
         <View style={[SearchBarStyles.inputContainer, containerStyle]}>
@@ -49,7 +54,25 @@ const SearchBar = ({
                     onInput(text);
                 }}
                 value={value}
+                returnKeyType={'search'}
+                onSubmitEditing={
+                    onSearchPress ? () => onSearchPress() : () => {}
+                }
             />
+            {isSearchButtonShow && (
+                <CustomButton
+                    OnPressCallback={
+                        onSearchPress ? () => onSearchPress() : () => {}
+                    }
+                    Icon={['fas', 'chevron-right']}
+                    IconSize={20}
+                    IconColor={ColorConstant.Text.Blue.Deep}
+                    ButtonContainerStyle={{
+                        padding: 0,
+                        backgroundColor: ColorConstant.Transparent.Clear,
+                    }}
+                />
+            )}
         </View>
     );
 };
@@ -69,7 +92,7 @@ const SearchBarStyles = StyleSheet.create({
 
     textInput: {
         flex: 1,
-        marginLeft: 10,
+        marginHorizontal: 10,
         borderBottomWidth: 1,
         borderColor: ColorConstant.BG.Grey.Deep,
     },

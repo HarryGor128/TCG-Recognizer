@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+    Alert,
     FlatList,
     Image,
     StyleSheet,
@@ -54,9 +55,20 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
         googleSearch();
     }, []);
 
+    const searchPrice = () => {
+        if (searchText) {
+            navigation.navigate('MarketResult', { SearchString: searchText });
+        } else {
+            Alert.alert(
+                'Error',
+                'Please input or select keyword before proceed.',
+            );
+        }
+    };
+
     const resultRenderer = ({ item }: { item: string }) => {
         const onPressResult = () => {
-            navigation.navigate('MarketResult', { SearchString: item });
+            setSearchText(item);
         };
 
         return (
@@ -82,11 +94,11 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
                 Title={'Result'}
             />
             <View style={GoogleResultScreenStyles.mainContainer}>
-                {/* <Image
+                <Image
                     source={{ uri: ScanningResult }}
                     style={GoogleResultScreenStyles.uploadImage}
                     resizeMode={'contain'}
-                /> */}
+                />
                 <SearchBar
                     onInput={onSearchBarInput}
                     value={searchText}
@@ -94,6 +106,8 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
                         marginHorizontal: 20,
                         marginVertical: 10,
                     }}
+                    isSearchButtonShow
+                    onSearchPress={searchPrice}
                 />
                 {textList.length > 0 ? (
                     <FlatList

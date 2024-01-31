@@ -9,6 +9,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { NavigationContainer } from '@react-navigation/native';
 
 import AppContainer from './scr/AppContainer';
+import './scr/i18n/i18n';
 import { store } from './scr/store/store';
 
 library.add(fab, far, fas);
