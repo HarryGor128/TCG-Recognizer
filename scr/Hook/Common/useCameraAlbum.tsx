@@ -1,5 +1,4 @@
 import { ReactNode, useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 import { Asset } from 'react-native-image-picker';
 
@@ -8,8 +7,6 @@ import CustomButton from '../../Components/Common/CustomButton/CustomButton';
 import mediaService from '../../Services/Common/mediaService';
 
 const useCameraAlbum = () => {
-    const { t } = useTranslation();
-
     const [photo, setPhoto] = useState<Asset>({});
 
     const {
@@ -39,13 +36,13 @@ const useCameraAlbum = () => {
         <View style={UseCameraAlbumStyles.popupContent}>
             <CustomButton
                 OnPressCallback={onPressAlbum}
-                ButtonText={t('Album')}
+                ButtonText={'Album'}
                 Icon={['fas', 'file-image']}
                 ContainerStyle={UseCameraAlbumStyles.button}
             />
             <CustomButton
                 OnPressCallback={onPressCamera}
-                ButtonText={t('Camera')}
+                ButtonText={'Camera'}
                 Icon={['fas', 'camera']}
                 ContainerStyle={UseCameraAlbumStyles.button}
             />
@@ -55,7 +52,7 @@ const useCameraAlbum = () => {
     const openUploadPopup = () => {
         setShowPopup(true);
         setPopupContent(popup);
-        setPopupTitle(t('UploadFrom'));
+        setPopupTitle('Upload from');
         setPopupContainerStyles(UseCameraAlbumStyles.popupContainer);
     };
 
