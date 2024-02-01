@@ -1,6 +1,8 @@
 import { AxiosRequestConfig } from 'axios';
 
-const googleApiKey = 'AIzaSyA_gTcwhBP7S7xH4i_6AB9sxpWAQshAKAU';
+import googleAPIKey from './googleAPIKey';
+
+const googleApiKey = googleAPIKey;
 
 const apiURL = '';
 
