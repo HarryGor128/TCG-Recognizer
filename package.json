@@ -8,14 +8,17 @@
         "lint": "eslint .",
         "start": "react-native start",
         "test": "jest",
-        "buildAndroid": "cd android && gradlew assembleRelease && cd ..",
-        "cleanAndroid": "cd android && gradlew clean && cd ..",
+        "buildAndroidWin": "cd android && gradlew assembleRelease && cd ..",
+        "buildAndroidMac": "cd android && ./gradlew assembleRelease && cd ..",
+        "cleanAndroidWin": "cd android && gradlew clean && cd ..",
+        "cleanAndroidMac": "cd android && ./gradlew clean && cd ..",
         "portRestart": "net stop winnat && net start winnat",
         "reinstall": "rm -rf node_modules && rm package-lock.json && npm install",
         "reset": "npm start -- --reset-cache",
         "adbReverse": "adb reverse tcp:8081 tcp:8081",
         "adbRestart": "adb kill-server && adb start-server",
-        "stopGradle": "cd android && gradlew --stop && cd .."
+        "stopGradleWin": "cd android && gradlew --stop && cd ..",
+        "stopGradleMac": "cd android && ./gradlew --stop && cd .."
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.4.2",
