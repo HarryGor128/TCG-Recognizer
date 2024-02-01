@@ -260,10 +260,13 @@ const MarketResult = ({
                 Title={SearchString}
             />
             <ScrollView style={MarketResultStyles.mainContainer}>
-                {listRenderer(yytList, require('../Assets/Market/YYTLogo.png'))}
+                {listRenderer(
+                    yytList,
+                    require('../../Assets/Market/YYTLogo.png'),
+                )}
                 {listRenderer(
                     bigWebList,
-                    require('../Assets/Market/BigWebLogo.png'),
+                    require('../../Assets/Market/BigWebLogo.png'),
                 )}
             </ScrollView>
         </>

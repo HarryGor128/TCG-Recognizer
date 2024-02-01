@@ -59,7 +59,7 @@ const useCameraAlbum = () => {
         setPopupContainerStyles(UseCameraAlbumStyles.popupContainer);
     };
 
-    return { openUploadPopup, photo };
+    return { openUploadPopup, photo, setPhoto };
 };
 
 export default useCameraAlbum;

@@ -1,13 +1,12 @@
 import { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, Image, StyleSheet, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { AppIconProps } from '../../Components/Common/AppIcon/AppIconRenderer';
 import AppPopupContext from '../../Components/Common/AppPopup/Context/AppPopupContext';
 import CustomButton from '../../Components/Common/CustomButton/CustomButton';
-import TextComponent from '../../Components/Common/TextComponent/TextComponent';
 import ColorConstant from '../../Constant/ColorConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import useCameraAlbum from '../../Hook/Common/useCameraAlbum';
@@ -60,7 +59,7 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
     const { setShowPopup, setPopupContent, setPopupTitle, setTitleIcon } =
         useContext(AppPopupContext);
 
-    const { openUploadPopup, photo } = useCameraAlbum();
+    const { openUploadPopup, photo, setPhoto } = useCameraAlbum();
 
     useAndroidBackButton();
 
@@ -69,6 +68,7 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
             navigation.navigate('GoogleResult', {
                 ScanningResult: photo.base64,
             });
+            setPhoto({});
         }
     }, [photo]);
 
@@ -81,7 +81,7 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
     };
 
     const onPressChangeLang = () => {
-        const icon: AppIconProps = { Icon: ['fas', 'language'] };
+        const icon: AppIconProps = { Icon: ['fas', 'language'], IconSize: 30 };
         setTitleIcon(icon);
         setPopupTitle(t('Language'));
         setPopupContent(<ChangeLangPopup />);
@@ -99,15 +99,11 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
                         StartOptionScreenStyles.changeLangButton
                     }
                 />
-                <TextComponent
-                    style={{
-                        flex: 1,
-                        textAlignVertical: 'center',
-                        alignSelf: 'center',
-                    }}
-                >
-                    {'Logo'}
-                </TextComponent>
+                <Image
+                    source={require('../../Assets/Logo/Logo.png')}
+                    style={{ flex: 1, alignSelf: 'center' }}
+                    resizeMode={'contain'}
+                />
             </View>
             <View style={StartOptionScreenStyles.buttonContainer}>
                 <CustomButton

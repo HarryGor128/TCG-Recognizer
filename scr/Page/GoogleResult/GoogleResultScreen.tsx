@@ -76,9 +76,7 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
                 style={GoogleResultScreenStyles.resultItem}
                 onPress={onPressResult}
             >
-                <TextComponent style={GoogleResultScreenStyles.resultItemText}>
-                    {item}
-                </TextComponent>
+                <TextComponent>{item}</TextComponent>
             </TouchableOpacity>
         );
     };
@@ -144,10 +142,6 @@ const GoogleResultScreenStyles = StyleSheet.create({
         marginHorizontal: 20,
         marginVertical: 10,
         backgroundColor: ColorConstant.BG.Blue.Bright,
-    },
-
-    resultItemText: {
-        color: 'black',
     },
 
     noResult: {
