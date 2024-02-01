@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
     Image,
     Linking,
@@ -31,6 +32,8 @@ const MarketResult = ({
     },
 }: NavigationProps) => {
     const dispatch = useAppDispatch();
+
+    const { t } = useTranslation();
 
     const [yytList, setYytList] = useState<MarketResultList[]>(
         [] as MarketResultList[],
@@ -158,7 +161,9 @@ const MarketResult = ({
                             marginBottom: 10,
                             marginHorizontal: 20,
                         }}
-                    >{`Highest price ~ Lowest price:\n${commonService.formatCurrency(
+                    >{`${t('HighestPrice')} ~ ${t(
+                        'LowestPrice',
+                    )}:\n${commonService.formatCurrency(
                         max,
                         data[0] ? data[0].data[0].cur : '',
                     )} ~ ${commonService.formatCurrency(
@@ -241,7 +246,7 @@ const MarketResult = ({
                     })
                 ) : (
                     <TextComponent style={MarketResultStyles.noResult}>
-                        {'No result'}
+                        {t('NoResult')}
                     </TextComponent>
                 )}
             </>

@@ -4,18 +4,16 @@ import { Asset } from 'react-native-image-picker';
 
 import AppPopupContext from '../../Components/Common/AppPopup/Context/AppPopupContext';
 import CustomButton from '../../Components/Common/CustomButton/CustomButton';
-import ColorConstant from '../../Constant/ColorConstant';
 import mediaService from '../../Services/Common/mediaService';
 
 const useCameraAlbum = () => {
-    const [photo, setPhoto] = useState<Asset>();
+    const [photo, setPhoto] = useState<Asset>({});
 
     const {
         setPopupContainerStyles,
         setShowPopup,
         setPopupContent,
         setPopupTitle,
-        setPopupTitleStyles,
     } = useContext(AppPopupContext);
 
     const onPressAlbum = async () => {
@@ -55,7 +53,6 @@ const useCameraAlbum = () => {
         setShowPopup(true);
         setPopupContent(popup);
         setPopupTitle('Upload from');
-        setPopupTitleStyles(UseCameraAlbumStyles.titleText);
         setPopupContainerStyles(UseCameraAlbumStyles.popupContainer);
     };
 
@@ -76,9 +73,5 @@ const UseCameraAlbumStyles = StyleSheet.create({
 
     button: {
         marginVertical: 20,
-    },
-
-    titleText: {
-        color: ColorConstant.Text.Black.Normal,
     },
 });

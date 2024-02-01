@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -10,11 +11,13 @@ import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 type NavigationProps = NativeStackScreenProps<ScreenParamList, 'ARView'>;
 
 const ARViewScreen = ({ navigation }: NavigationProps) => {
+    const { t } = useTranslation();
+
     return (
         <View style={ARViewStyles.mainContainer}>
             <AppHeader
                 LeftStack={<AppHeaderBackButton navigation={navigation} />}
-                Title={'AR View'}
+                Title={t('ARScene')}
             />
         </View>
     );

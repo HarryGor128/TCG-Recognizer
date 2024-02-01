@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
     Alert,
     FlatList,
@@ -32,6 +33,8 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
 
     const dispatch = useAppDispatch();
 
+    const { t } = useTranslation();
+
     useAndroidBackButton(() => {
         navigation.goBack();
     });
@@ -59,10 +62,7 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
         if (searchText) {
             navigation.navigate('MarketResult', { SearchString: searchText });
         } else {
-            Alert.alert(
-                'Error',
-                'Please input or select keyword before proceed.',
-            );
+            Alert.alert(t('Error'), t('ErrorSearchPrice'));
         }
     };
 
@@ -91,7 +91,7 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
         <>
             <AppHeader
                 LeftStack={<AppHeaderBackButton navigation={navigation} />}
-                Title={'Result'}
+                Title={t('Result')}
             />
             <View style={GoogleResultScreenStyles.mainContainer}>
                 <Image
@@ -117,7 +117,7 @@ const GoogleResultScreen = ({ route, navigation }: NavigationProps) => {
                     />
                 ) : (
                     <TextComponent style={GoogleResultScreenStyles.noResult}>
-                        {'No result'}
+                        {t('NoResult')}
                     </TextComponent>
                 )}
             </View>

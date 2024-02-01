@@ -3,5 +3,12 @@
     "ARScene": "AR Scene",
     "Language": "Language",
     "English": "English",
-    "ChineseTraditional": "Chinese Traditional"
+    "ChineseTraditional": "Chinese Traditional",
+    "Error": "Error",
+    "ErrorSearchPrice": "Please input or select keyword before proceed.",
+    "Result": "Result",
+    "Search": "Search",
+    "NoResult": "No result",
+    "HighestPrice": "Highest price",
+    "LowestPrice": "Lowest price"
 }

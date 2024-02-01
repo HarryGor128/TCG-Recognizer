@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import {
     StyleProp,
     StyleSheet,
@@ -34,6 +35,8 @@ const SearchBar = ({
     containerStyle,
     inputStyle,
 }: SearchBarProps) => {
+    const { t } = useTranslation();
+
     return (
         <View style={[SearchBarStyles.inputContainer, containerStyle]}>
             <AppIcon
@@ -44,7 +47,7 @@ const SearchBar = ({
             />
             <TextInputComponent
                 style={[SearchBarStyles.textInput, inputStyle]}
-                placeholder={placeHolderText ? placeHolderText : 'Search'}
+                placeholder={placeHolderText ? placeHolderText : t('Search')}
                 placeholderTextColor={
                     placeHolderTextColor
                         ? placeHolderTextColor

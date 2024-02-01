@@ -1,1 +1,14 @@
-{}
+{
+    "Scanning": "掃描",
+    "ARScene": "AR 場景",
+    "Language": "語言",
+    "English": "英語",
+    "ChineseTraditional": "繁體中文",
+    "Error": "錯誤",
+    "ErrorSearchPrice": "請先輸入或選擇關鍵字，然後再繼續。",
+    "Result": "結果",
+    "Search": "搜尋",
+    "NoResult": "沒有結果",
+    "HighestPrice": "最高價格",
+    "LowestPrice": "最低價格"
+}

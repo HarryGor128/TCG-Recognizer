@@ -148,6 +148,7 @@ const AppPopupStyles = StyleSheet.create({
     },
 
     title: {
+        marginLeft: 10,
         fontSize: FontSizeConstant.large,
         color: ColorConstant.Text.Blue.Deep,
     },
