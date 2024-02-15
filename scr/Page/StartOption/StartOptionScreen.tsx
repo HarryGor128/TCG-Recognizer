@@ -95,6 +95,7 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
                     OnPressCallback={onPressChangeLang}
                     Icon={['fas', 'language']}
                     IconSize={30}
+                    IconColor={ColorConstant.Text.Blue.Bright}
                     ButtonContainerStyle={
                         StartOptionScreenStyles.changeLangButton
                     }
@@ -130,7 +131,7 @@ const StartOptionScreenStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         justifyContent: 'space-evenly',
-        backgroundColor: ColorConstant.BG.White.Normal,
+        backgroundColor: ColorConstant.BG.Blue.Deep,
     },
 
     buttonContainer: {

@@ -128,6 +128,7 @@ export default GoogleResultScreen;
 const GoogleResultScreenStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
+        backgroundColor: ColorConstant.BG.Blue.Deep,
     },
 
     uploadImage: {

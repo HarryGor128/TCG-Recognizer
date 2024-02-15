@@ -63,6 +63,7 @@ const AppHeader = ({
                             fontSize: HeaderTextSize,
                         },
                     ]}
+                    numberOfLines={1}
                     ellipsizeMode={'tail'}
                 >
                     {Title}
@@ -84,7 +85,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        backgroundColor: ColorConstant.BG.Blue.Bright,
+        backgroundColor: ColorConstant.BG.Blue.Dark,
     },
 
     HeaderTitleContainer: {
@@ -95,8 +96,9 @@ const styles = StyleSheet.create({
     },
 
     HeaderTitleText: {
+        flex: 1,
         fontSize: FontSizeConstant.large,
-        color: ColorConstant.Text.Blue.Deep,
+        color: ColorConstant.Text.White.Normal,
         textAlign: 'center',
         textAlignVertical: 'center',
     },

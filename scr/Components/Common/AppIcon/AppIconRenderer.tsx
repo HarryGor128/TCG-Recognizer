@@ -4,6 +4,8 @@ import {
     FontAwesomeIconStyle,
 } from '@fortawesome/react-native-fontawesome';
 
+import ColorConstant from '../../../Constant/ColorConstant';
+
 export interface AppIconProps {
     Icon: IconProp; // Display Icon
     IconSize?: number; // Icon size
@@ -23,7 +25,7 @@ const AppIcon = ({ Icon, IconSize, IconColor, IconStyle }: AppIconProps) => {
         <FontAwesomeIcon
             icon={Icon}
             size={IconSize}
-            color={IconColor}
+            color={IconColor ? IconColor : ColorConstant.Text.Blue.Light}
             style={IconStyle}
         />
     );

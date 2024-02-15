@@ -90,7 +90,7 @@ const SearchBarStyles = StyleSheet.create({
         borderRadius: 10,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: ColorConstant.BG.Grey.Normal,
+        backgroundColor: ColorConstant.BG.Blue.Normal,
     },
 
     textInput: {

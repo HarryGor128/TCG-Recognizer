@@ -38,6 +38,7 @@ const AppHeaderBackButton = ({
             OnPressCallback={OnPressBack}
             Icon={['fas', 'chevron-left']}
             IconSize={30}
+            IconColor={ColorConstant.Text.White.Normal}
             ButtonContainerStyle={{
                 padding: 0,
                 backgroundColor: ColorConstant.Transparent.Clear,

@@ -8,11 +8,11 @@ import {
 } from 'react-native';
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
 
 import ColorConstant from '../../../Constant/ColorConstant';
 import FontSizeConstant from '../../../Constant/FontSizeConstant';
 import IconConstant from '../../../Constant/IconConstant';
+import AppIcon from '../AppIcon/AppIconRenderer';
 import TextComponent from '../TextComponent/TextComponent';
 
 export interface CustomButtonProps {
@@ -34,10 +34,12 @@ const IconRenderer = (props: CustomButtonProps) => {
     return (
         <>
             {Icon && (
-                <FontAwesomeIcon
-                    icon={Icon}
-                    size={IconSize ? IconSize : IconConstant.DefaultIconSize}
-                    color={
+                <AppIcon
+                    Icon={Icon}
+                    IconSize={
+                        IconSize ? IconSize : IconConstant.DefaultIconSize
+                    }
+                    IconColor={
                         Disabled
                             ? ColorConstant.Text.Grey.Dark
                             : IconColor

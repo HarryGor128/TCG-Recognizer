@@ -160,6 +160,7 @@ const MarketResult = ({
                             textAlign: 'center',
                             marginBottom: 10,
                             marginHorizontal: 20,
+                            color: ColorConstant.Text.White.Normal,
                         }}
                     >{`${t('HighestPrice')} ~ ${t(
                         'LowestPrice',
@@ -213,7 +214,9 @@ const MarketResult = ({
                         style={MarketResultStyles.itemImg}
                     />
                     <View style={MarketResultStyles.detail}>
-                        <TextComponent>{item.cardName}</TextComponent>
+                        <TextComponent style={{ flex: 1 }}>
+                            {item.cardName}
+                        </TextComponent>
                         <TextComponent>
                             {commonService.formatCurrency(item.price, item.cur)}
                         </TextComponent>
@@ -278,6 +281,7 @@ export default MarketResult;
 const MarketResultStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
+        backgroundColor: ColorConstant.BG.Blue.Deep,
     },
 
     marketLogo: {
@@ -287,7 +291,7 @@ const MarketResultStyles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: ColorConstant.BG.Grey.Normal,
+        backgroundColor: ColorConstant.Transparent.Black,
     },
 
     sectionContainer: {
@@ -301,7 +305,7 @@ const MarketResultStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 10,
-        backgroundColor: ColorConstant.BG.Blue.Bright,
+        backgroundColor: ColorConstant.BG.Blue.Normal,
     },
 
     sectionItem: {
@@ -322,6 +326,7 @@ const MarketResultStyles = StyleSheet.create({
     },
 
     detail: {
+        flex: 1,
         marginLeft: 10,
     },
 
