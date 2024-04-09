@@ -1,6 +1,7 @@
 const ColorConstant = {
     Transparent: {
         Black: '#00000050',
+        White: '#FFFFFF50',
         Clear: '#00000000',
     },
 

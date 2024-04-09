@@ -13,6 +13,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
 import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
+import AppIcon from '../../Components/Common/AppIcon/AppIconRenderer';
 import TextComponent from '../../Components/Common/TextComponent/TextComponent';
 import ColorConstant from '../../Constant/ColorConstant';
 import commonService from '../../Services/Common/commonService';
@@ -42,6 +43,8 @@ const MarketResult = ({
         [] as MarketResultList[],
     );
     const [exchangeRate, setExchangeRate] = useState<number>(0);
+    const [yytExpand, setYytExpand] = useState<boolean>(false);
+    const [bigWebExpand, setBigWebExpand] = useState<boolean>(false);
 
     const getBigWebData = async () => {
         const bigWebResult = await MarketService.BigWebSearch(SearchString);
@@ -104,10 +107,6 @@ const MarketResult = ({
 
     const getExchangeRate = async () => {
         const result = await MarketService.getCurrencyExchangeRate('jpy');
-        console.log(
-            '🚀 ~ file: MarketResult.tsx:105 ~ getExchangeRate ~ result:',
-            result,
-        );
         setExchangeRate(result);
     };
 
@@ -121,7 +120,12 @@ const MarketResult = ({
         getData();
     }, []);
 
-    const listRenderer = (data: MarketResultList[], logo: any) => {
+    const listRenderer = (
+        data: MarketResultList[],
+        logo: any,
+        key: 'bigWeb' | 'yyt',
+        expand: boolean,
+    ) => {
         const calExchange = (price: number): number => {
             return price * exchangeRate;
         };
@@ -150,28 +154,52 @@ const MarketResult = ({
         const marketLogoRenderer = () => {
             const { max, min } = findMaxMinPrice(concatAllItem());
 
+            const onPressLogo = () => {
+                switch (key) {
+                    case 'bigWeb':
+                        setBigWebExpand((prev) => !prev);
+                        break;
+                    case 'yyt':
+                        setYytExpand((prev) => !prev);
+                        break;
+                    default:
+                        break;
+                }
+            };
+
             return (
-                <>
+                <TouchableOpacity onPress={onPressLogo}>
                     <View style={MarketResultStyles.marketLogo}>
                         <Image source={logo} resizeMode={'contain'} />
                     </View>
-                    <TextComponent
-                        style={{
-                            textAlign: 'center',
-                            marginBottom: 10,
-                            marginHorizontal: 20,
-                            color: ColorConstant.Text.White.Normal,
-                        }}
-                    >{`${t('HighestPrice')} ~ ${t(
-                        'LowestPrice',
-                    )}:\n${commonService.formatCurrency(
-                        max,
-                        data[0] ? data[0].data[0].cur : '',
-                    )} ~ ${commonService.formatCurrency(
-                        min,
-                        data[0] ? data[0].data[0].cur : '',
-                    )}`}</TextComponent>
-                </>
+                    <View style={MarketResultStyles.summaryRow}>
+                        <TextComponent
+                            style={{
+                                textAlign: 'center',
+                                marginBottom: 10,
+                                marginHorizontal: 20,
+                                color: ColorConstant.Text.White.Normal,
+                            }}
+                        >{`${t('HighestPrice')} ~ ${t(
+                            'LowestPrice',
+                        )}:\n${commonService.formatCurrency(
+                            max,
+                            data[0] ? data[0].data[0].cur : '',
+                        )} ~ ${commonService.formatCurrency(
+                            min,
+                            data[0] ? data[0].data[0].cur : '',
+                        )}`}</TextComponent>
+                        <AppIcon
+                            Icon={
+                                expand
+                                    ? ['fas', 'arrow-up']
+                                    : ['fas', 'arrow-down']
+                            }
+                            IconSize={30}
+                            IconColor={ColorConstant.Text.White.Normal}
+                        />
+                    </View>
+                </TouchableOpacity>
             );
         };
 
@@ -232,7 +260,7 @@ const MarketResult = ({
         return (
             <>
                 {marketLogoRenderer()}
-                {data.length > 0 ? (
+                {data.length > 0 && expand ? (
                     data.map((item, index) => {
                         return (
                             <View key={index}>
@@ -248,9 +276,13 @@ const MarketResult = ({
                         );
                     })
                 ) : (
-                    <TextComponent style={MarketResultStyles.noResult}>
-                        {t('NoResult')}
-                    </TextComponent>
+                    <>
+                        {data.length <= 0 && (
+                            <TextComponent style={MarketResultStyles.noResult}>
+                                {t('NoResult')}
+                            </TextComponent>
+                        )}
+                    </>
                 )}
             </>
         );
@@ -266,10 +298,14 @@ const MarketResult = ({
                 {listRenderer(
                     yytList,
                     require('../../Assets/Market/YYTLogo.png'),
+                    'yyt',
+                    yytExpand,
                 )}
                 {listRenderer(
                     bigWebList,
                     require('../../Assets/Market/BigWebLogo.png'),
+                    'bigWeb',
+                    bigWebExpand,
                 )}
             </ScrollView>
         </>
@@ -291,7 +327,13 @@ const MarketResultStyles = StyleSheet.create({
         alignSelf: 'center',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: ColorConstant.Transparent.Black,
+        backgroundColor: ColorConstant.Transparent.White,
+    },
+
+    summaryRow: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
     },
 
     sectionContainer: {

@@ -10,17 +10,24 @@ const MarketService = {
     async getCurrencyExchangeRate(
         foreign: string,
         to: string = 'hkd',
+        date: string = 'latest', // The date should either be latest or in YYYY-MM-DD format,
+        apiVersion: string = 'v1',
     ): Promise<number> {
         try {
+            // Migration to the new URL
+            // const result = await axios.get(
+            //     `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${foreign}/${to}.json`,
+            // );
+
             const result = await axios.get(
-                `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${foreign}/${to}.json`,
+                `https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@${date}/${apiVersion}/currencies/${foreign}.json`,
             );
             console.log(
                 '🚀 ~ file: MarketService.ts:15 ~ getCurrencyExchange ~ result:',
-                result.data,
+                result.data[foreign][to],
             );
 
-            return result.data[to];
+            return result.data[foreign][to];
         } catch (error: any) {
             console.log(
                 '🚀 ~ file: MarketService.ts:19 ~ getCurrencyExchange ~ error:',
