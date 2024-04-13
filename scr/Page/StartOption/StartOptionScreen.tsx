@@ -88,6 +88,10 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
         setShowPopup(true);
     };
 
+    const opPressCardSearch = () => {
+        navigation.navigate('CardList');
+    };
+
     return (
         <View style={StartOptionScreenStyles.mainContainer}>
             <View style={StartOptionScreenStyles.logoContainer}>
@@ -119,6 +123,12 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
                     Icon={['fas', 'vr-cardboard']}
                     ContainerStyle={StartOptionScreenStyles.button}
                     Disabled
+                />
+                <CustomButton
+                    OnPressCallback={opPressCardSearch}
+                    ButtonText={t('CardSearch')}
+                    Icon={['fas', 'search']}
+                    ContainerStyle={StartOptionScreenStyles.button}
                 />
             </View>
         </View>

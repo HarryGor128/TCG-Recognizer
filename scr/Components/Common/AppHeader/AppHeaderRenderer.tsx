@@ -42,19 +42,19 @@ const AppHeader = ({
     return (
         <View
             style={[
-                styles.AppHeaderContainer,
+                AppHeaderStyles.AppHeaderContainer,
                 BackgroundColor !== undefined && {
                     backgroundColor: BackgroundColor,
                 },
             ]}
         >
-            <View style={styles.LeftStackContainer}>
+            <View style={AppHeaderStyles.LeftStackContainer}>
                 {LeftStack && !HeaderLeft && LeftStack}
             </View>
-            <View style={styles.HeaderTitleContainer}>
+            <View style={AppHeaderStyles.HeaderTitleContainer}>
                 <TextComponent
                     style={[
-                        styles.HeaderTitleText,
+                        AppHeaderStyles.HeaderTitleText,
                         HeaderBold && { fontWeight: 'bold' },
                         HeaderTextColor !== undefined && {
                             color: HeaderTextColor,
@@ -69,7 +69,7 @@ const AppHeader = ({
                     {Title}
                 </TextComponent>
             </View>
-            <View style={styles.RightStackContainer}>
+            <View style={AppHeaderStyles.RightStackContainer}>
                 {RightStack && !HeaderRight && RightStack}
             </View>
         </View>
@@ -78,7 +78,7 @@ const AppHeader = ({
 
 export default AppHeader;
 
-const styles = StyleSheet.create({
+const AppHeaderStyles = StyleSheet.create({
     AppHeaderContainer: {
         width: '100%',
         height: 55,

@@ -1,7 +1,9 @@
 import { useTranslation } from 'react-i18next';
 import {
+    NativeSyntheticEvent,
     StyleProp,
     StyleSheet,
+    TextInputFocusEventData,
     TextStyle,
     View,
     ViewStyle,
@@ -22,6 +24,8 @@ interface SearchBarProps {
     Icon?: AppIconProps; // Set icon props
     containerStyle?: StyleProp<ViewStyle>; // Container style
     inputStyle?: StyleProp<TextStyle>; // Text input style
+    onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void; // On input blur
+    onFocus?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void; // On input focus
 }
 
 const SearchBar = ({
@@ -34,6 +38,8 @@ const SearchBar = ({
     Icon,
     containerStyle,
     inputStyle,
+    onBlur,
+    onFocus,
 }: SearchBarProps) => {
     const { t } = useTranslation();
 
@@ -51,7 +57,7 @@ const SearchBar = ({
                 placeholderTextColor={
                     placeHolderTextColor
                         ? placeHolderTextColor
-                        : ColorConstant.Text.Grey.Dark
+                        : ColorConstant.Text.Black.Normal
                 }
                 onChangeText={(text) => {
                     onInput(text);
@@ -61,6 +67,8 @@ const SearchBar = ({
                 onSubmitEditing={
                     onSearchPress ? () => onSearchPress() : () => {}
                 }
+                onBlur={onBlur}
+                onFocus={onFocus}
             />
             {isSearchButtonShow && (
                 <CustomButton

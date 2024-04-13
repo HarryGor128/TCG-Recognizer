@@ -2,7 +2,6 @@ import { View } from 'react-native';
 
 import AppPopup from './Components/Common/AppPopup/AppPopup';
 import CustomLoader from './Components/Common/CustomLoader/CustomLoader';
-import TouchableKeyboardDismissView from './Components/Common/TouchableKeyboardDismissView/TouchableKeyboardDismissView';
 
 import MainStack from './Page/Stack/MainStack';
 
@@ -19,17 +18,15 @@ const AppContainer = () => {
     const appState = useAppSelector((state) => state.appState);
 
     return (
-        <TouchableKeyboardDismissView>
-            <AppPopup>
-                <View style={{ flex: 1 }}>
-                    <MainStack />
-                    <CustomLoader
-                        IsLoading={appState.isLoading}
-                        LoaderText={appState.loaderText}
-                    />
-                </View>
-            </AppPopup>
-        </TouchableKeyboardDismissView>
+        <AppPopup>
+            <View style={{ flex: 1 }}>
+                <MainStack />
+                <CustomLoader
+                    IsLoading={appState.isLoading}
+                    LoaderText={appState.loaderText}
+                />
+            </View>
+        </AppPopup>
     );
 };
 

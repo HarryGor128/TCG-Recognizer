@@ -8,6 +8,7 @@ type ScreenParamList = {
     ARView: undefined;
     GoogleResult: GoogleResultParam;
     MarketResult: MarketResult;
+    CardList: undefined;
 };
 
 export default ScreenParamList;
