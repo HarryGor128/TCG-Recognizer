@@ -90,12 +90,10 @@ const CardListScreen = ({ navigation }: NavigationProps) => {
 
     return (
         <>
-            {!showHistory && (
-                <AppHeader
-                    LeftStack={<AppHeaderBackButton navigation={navigation} />}
-                    Title={t('CardSearch')}
-                />
-            )}
+            <AppHeader
+                LeftStack={<AppHeaderBackButton navigation={navigation} />}
+                Title={t('CardSearch')}
+            />
             <View style={CardListStyles.mainContainer}>
                 <SearchBar
                     onInput={setSearchText}
