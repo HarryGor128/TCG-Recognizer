@@ -51,24 +51,24 @@ const AppHeader = ({
             <View style={AppHeaderStyles.LeftStackContainer}>
                 {LeftStack && !HeaderLeft && LeftStack}
             </View>
-            <View style={AppHeaderStyles.HeaderTitleContainer}>
-                <TextComponent
-                    style={[
-                        AppHeaderStyles.HeaderTitleText,
-                        HeaderBold && { fontWeight: 'bold' },
-                        HeaderTextColor !== undefined && {
-                            color: HeaderTextColor,
-                        },
-                        HeaderTextSize !== undefined && {
-                            fontSize: HeaderTextSize,
-                        },
-                    ]}
-                    numberOfLines={1}
-                    ellipsizeMode={'tail'}
-                >
-                    {Title}
-                </TextComponent>
-            </View>
+            {/* <View style={AppHeaderStyles.HeaderTitleContainer}> */}
+            <TextComponent
+                style={[
+                    AppHeaderStyles.HeaderTitleText,
+                    HeaderBold && { fontWeight: 'bold' },
+                    HeaderTextColor !== undefined && {
+                        color: HeaderTextColor,
+                    },
+                    HeaderTextSize !== undefined && {
+                        fontSize: HeaderTextSize,
+                    },
+                ]}
+                numberOfLines={1}
+                ellipsizeMode={'tail'}
+            >
+                {Title}
+            </TextComponent>
+            {/* </View> */}
             <View style={AppHeaderStyles.RightStackContainer}>
                 {RightStack && !HeaderRight && RightStack}
             </View>
@@ -88,19 +88,20 @@ const AppHeaderStyles = StyleSheet.create({
         backgroundColor: ColorConstant.BG.Blue.Dark,
     },
 
-    HeaderTitleContainer: {
-        flex: 1,
-        marginHorizontal: 10,
-        maxWidth: '50%',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
+    // HeaderTitleContainer: {
+    //     flex: 1,
+    //     marginHorizontal: 10,
+    //     maxWidth: '50%',
+    //     justifyContent: 'center',
+    //     alignItems: 'center',
+    // },
 
     HeaderTitleText: {
         fontSize: FontSizeConstant.large,
         color: ColorConstant.Text.White.Normal,
         textAlign: 'center',
         textAlignVertical: 'center',
+        maxWidth: '40%',
     },
 
     LeftStackContainer: {

@@ -18,7 +18,8 @@
         "adbReverse": "adb reverse tcp:8081 tcp:8081",
         "adbRestart": "adb kill-server && adb start-server",
         "stopGradleWin": "cd android && gradlew --stop && cd ..",
-        "stopGradleMac": "cd android && ./gradlew --stop && cd .."
+        "stopGradleMac": "cd android && ./gradlew --stop && cd ..",
+        "wifiConnect": "adb connect 192.168.1.9:37743"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.4.2",
