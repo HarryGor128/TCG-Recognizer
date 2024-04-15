@@ -31,16 +31,18 @@ const CardListScreen = ({ navigation }: NavigationProps) => {
 
     const onSearchPress = async () => {
         setShowHistory(false);
-        const getHistory = await getData('SearchHistory');
+        if (searchText) {
+            const getHistory = await getData('SearchHistory');
 
-        if (getHistory) {
-            const historyList: string[] = JSON.parse(getHistory);
-            if (!historyList.includes(searchText)) {
-                historyList.push(searchText);
-                setData('SearchHistory', JSON.stringify(historyList));
+            if (getHistory) {
+                const historyList: string[] = JSON.parse(getHistory);
+                if (!historyList.includes(searchText)) {
+                    historyList.push(searchText);
+                    setData('SearchHistory', JSON.stringify(historyList));
+                }
+            } else {
+                setData('SearchHistory', JSON.stringify([searchText]));
             }
-        } else {
-            setData('SearchHistory', JSON.stringify([searchText]));
         }
     };
 

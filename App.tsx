@@ -9,6 +9,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { NavigationContainer } from '@react-navigation/native';
 
 import AppContainer from './scr/AppContainer';
+import ColorConstant from './scr/Constant/ColorConstant';
 import './scr/i18n/i18n';
 import { store } from './scr/store/store';
 
@@ -21,7 +22,12 @@ const App = () => {
         <Provider store={store}>
             <GestureHandlerRootView style={{ flex: 1 }}>
                 <NavigationContainer>
-                    <SafeAreaView style={{ flex: 1 }}>
+                    <SafeAreaView
+                        style={{
+                            flex: 1,
+                            backgroundColor: ColorConstant.BG.Blue.Deep,
+                        }}
+                    >
                         <AppContainer />
                     </SafeAreaView>
                 </NavigationContainer>
