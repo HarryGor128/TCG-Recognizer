@@ -122,7 +122,6 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
                     ButtonText={t('ARScene')}
                     Icon={['fas', 'vr-cardboard']}
                     ContainerStyle={StartOptionScreenStyles.button}
-                    Disabled
                 />
                 <CustomButton
                     OnPressCallback={opPressCardSearch}

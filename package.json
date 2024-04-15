@@ -19,7 +19,8 @@
         "adbRestart": "adb kill-server && adb start-server",
         "stopGradleWin": "cd android && gradlew --stop && cd ..",
         "stopGradleMac": "cd android && ./gradlew --stop && cd ..",
-        "wifiConnect": "adb connect 192.168.1.9:37743"
+        "wifiConnect": "adb connect 192.168.1.9:37743",
+        "wifiDisconnect": "adb disconnect 192.168.1.9:37743"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.4.2",
