@@ -93,10 +93,10 @@ const AppHeaderStyles = StyleSheet.create({
         marginHorizontal: 10,
         maxWidth: '50%',
         justifyContent: 'center',
+        alignItems: 'center',
     },
 
     HeaderTitleText: {
-        flex: 1,
         fontSize: FontSizeConstant.large,
         color: ColorConstant.Text.White.Normal,
         textAlign: 'center',
