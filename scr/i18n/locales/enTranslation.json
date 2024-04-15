@@ -14,5 +14,6 @@
     "Album": "Album",
     "Camera": "Camera",
     "UploadFrom": "Upload from",
-    "CardSearch": "Card Search"
+    "CardSearch": "Card Search",
+    "NeedCameraPermission": "Need camera permission"
 }

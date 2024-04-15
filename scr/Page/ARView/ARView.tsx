@@ -1,5 +1,6 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import {
@@ -14,6 +15,7 @@ import {
 import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
 import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
 import ColorConstant from '../../Constant/ColorConstant';
+import { PermissionService } from '../../Services/Common/PermissionService';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 
 type NavigationProps = NativeStackScreenProps<ScreenParamList, 'ARView'>;
@@ -39,6 +41,19 @@ const ARScene = () => {
 
 const ARViewScreen = ({ navigation }: NavigationProps) => {
     const { t } = useTranslation();
+
+    const cameraPermission = async () => {
+        const result = await PermissionService.CameraPermission();
+
+        if (!result) {
+            Alert.alert(t('Error'), t('NeedCameraPermission'));
+            navigation.goBack();
+        }
+    };
+
+    useEffect(() => {
+        cameraPermission();
+    }, []);
 
     return (
         <View style={ARViewStyles.mainContainer}>

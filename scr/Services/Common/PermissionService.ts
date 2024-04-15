@@ -1,5 +1,5 @@
 import { PermissionsAndroid, Platform } from 'react-native';
-import { PERMISSIONS, request } from 'react-native-permissions';
+import { PERMISSIONS, RESULTS, request } from 'react-native-permissions';
 
 export const PermissionService = {
     // Add
@@ -58,36 +58,45 @@ export const PermissionService = {
     },
 
     // Add <uses-permission android:name="android.permission.CAMERA" /> to AndroidManifest first
-    async CameraPermission() {
-        if (Platform.OS === 'android') {
-            //Camera permission
-            try {
-                const granted = await PermissionsAndroid.request(
-                    PermissionsAndroid.PERMISSIONS.CAMERA,
-                    {
-                        title: 'Camera Permission',
-                        message: '',
-                        //   buttonNeutral: "Ask Me Later",
-                        buttonNegative: 'Cancel',
-                        buttonPositive: 'OK',
-                    },
-                );
-                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                    console.log('You can use the camera');
-                } else {
-                    console.log('Camera permission denied');
-                }
-            } catch (err) {
-                console.warn(err);
-            }
-        } else {
-            request(PERMISSIONS.IOS.CAMERA).then((result) => {
-                console.log(
-                    '🚀 ~ file: PermissionService.ts ~ line 78 ~ request ~ result',
-                    result,
-                );
-            });
-        }
+    async CameraPermission(): Promise<boolean> {
+        // if (Platform.OS === 'android') {
+        //     //Camera permission
+        //     try {
+        //         const granted = await PermissionsAndroid.request(
+        //             PermissionsAndroid.PERMISSIONS.CAMERA,
+        //             // {
+        //             //     title: 'Camera Permission',
+        //             //     message: '',
+        //             //     buttonPositive: 'OK',
+        //             // },
+        //         );
+        //         if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        //             console.log('You can use the camera');
+        //             return Promise.resolve(true);
+        //         } else {
+        //             console.log('Camera permission denied');
+        //             return Promise.resolve(false);
+        //         }
+        //     } catch (err) {
+        //         console.warn(err);
+        //         return Promise.resolve(false);
+        //     }
+        // } else {
+        //     const iosResult = await request(PERMISSIONS.IOS.CAMERA);
+
+        //     return Promise.resolve(iosResult === RESULTS.GRANTED);
+        // }
+        const result = await request(
+            Platform.OS === 'android'
+                ? PERMISSIONS.ANDROID.CAMERA
+                : PERMISSIONS.IOS.CAMERA,
+        );
+        console.log(
+            '🚀 ~ file: PermissionService.ts:103 ~ CameraPermission ~ result:',
+            result,
+        );
+
+        return Promise.resolve(result === RESULTS.GRANTED);
     },
 
     // Add <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> to AndroidManifest first
