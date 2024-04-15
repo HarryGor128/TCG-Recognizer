@@ -43,7 +43,9 @@ const CardList = ({ cardList, onPressCard }: CardListProps) => {
                     keyExtractor={(item, index) => index.toString()}
                 />
             ) : (
-                <TextComponent>{t('NoResult')}</TextComponent>
+                <TextComponent style={CardListStyles.noResult}>
+                    {t('NoResult')}
+                </TextComponent>
             )}
         </>
     );
@@ -63,5 +65,12 @@ const CardListStyles = StyleSheet.create({
     cardName: {
         fontWeight: 'bold',
         fontSize: FontSizeConstant.xlarge,
+    },
+
+    noResult: {
+        flex: 1,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        color: ColorConstant.Text.White.Normal,
     },
 });
