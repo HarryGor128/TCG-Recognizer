@@ -84,6 +84,10 @@ const CardListScreen = ({ navigation }: NavigationProps) => {
         setShowHistory(true);
     };
 
+    const onPressCard = (cardName: string) => {
+        navigation.navigate('MarketResult', { SearchString: cardName });
+    };
+
     return (
         <>
             {!showHistory && (
@@ -106,7 +110,7 @@ const CardListScreen = ({ navigation }: NavigationProps) => {
                         onPressSearchHistory={onPressSearchHistory}
                     />
                 ) : (
-                    <CardList cardList={cardList} />
+                    <CardList cardList={cardList} onPressCard={onPressCard} />
                 )}
             </View>
         </>
