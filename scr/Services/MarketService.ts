@@ -27,7 +27,7 @@ const MarketService = {
                 result.data[foreign][to],
             );
 
-            return result.data[foreign][to];
+            return Promise.resolve(result.data[foreign][to]);
         } catch (error: any) {
             console.log(
                 '🚀 ~ file: MarketService.ts:19 ~ getCurrencyExchange ~ error:',

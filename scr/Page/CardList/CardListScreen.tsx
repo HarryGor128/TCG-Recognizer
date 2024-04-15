@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet, View } from 'react-native';
 
@@ -13,15 +13,22 @@ import SearchBar from '../../Components/Common/SearchBar/SearchBar';
 import ColorConstant from '../../Constant/ColorConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import useAsyncStorage from '../../Hook/Common/useAsyncStorage/useAsyncStorage';
+import CardListService from '../../Services/CardListService';
+import YGOCardList from '../../Type/CardList/YGOCardList';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
+import { closeLoader, openLoader } from '../../store/reducer/appStateSlice';
+import { useAppDispatch } from '../../store/storeHooks';
 
 type NavigationProps = NativeStackScreenProps<ScreenParamList, 'CardList'>;
 
 const CardListScreen = ({ navigation }: NavigationProps) => {
     const [showHistory, setShowHistory] = useState<boolean>(false);
     const [searchText, setSearchText] = useState<string>('');
+    const [cardList, setCardList] = useState<YGOCardList[]>([]);
 
     const { getData, setData } = useAsyncStorage();
+
+    const dispatch = useAppDispatch();
 
     useAndroidBackButton(() => {
         navigation.goBack();
@@ -29,9 +36,10 @@ const CardListScreen = ({ navigation }: NavigationProps) => {
 
     const { t } = useTranslation();
 
-    const onSearchPress = async () => {
-        setShowHistory(false);
+    const searching = async () => {
+        dispatch(openLoader());
         if (searchText) {
+            // Store search history
             const getHistory = await getData('SearchHistory');
 
             if (getHistory) {
@@ -43,12 +51,30 @@ const CardListScreen = ({ navigation }: NavigationProps) => {
             } else {
                 setData('SearchHistory', JSON.stringify([searchText]));
             }
+
+            // Get data in api
+            const result = await CardListService.searchCardInfoByName(
+                searchText,
+            );
+
+            setCardList(result);
         }
+        dispatch(closeLoader());
+    };
+
+    useEffect(() => {
+        if (searchText && !showHistory) {
+            searching();
+        }
+    }, [searchText, showHistory]);
+
+    const onSearchPress = async () => {
+        setShowHistory(false);
     };
 
     const onPressSearchHistory = (text: string) => {
         setSearchText(text);
-        onSearchPress();
+        setShowHistory(false);
     };
 
     const onFocus = () => {
@@ -80,7 +106,7 @@ const CardListScreen = ({ navigation }: NavigationProps) => {
                         onPressSearchHistory={onPressSearchHistory}
                     />
                 ) : (
-                    <CardList />
+                    <CardList cardList={cardList} />
                 )}
             </View>
         </>
