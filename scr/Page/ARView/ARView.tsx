@@ -15,6 +15,7 @@ import {
 import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
 import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
 import ColorConstant from '../../Constant/ColorConstant';
+import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import { PermissionService } from '../../Services/Common/PermissionService';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 
@@ -41,6 +42,10 @@ const ARScene = () => {
 
 const ARViewScreen = ({ navigation }: NavigationProps) => {
     const { t } = useTranslation();
+
+    useAndroidBackButton(() => {
+        navigation.goBack();
+    });
 
     const cameraPermission = async () => {
         const result = await PermissionService.CameraPermission();
