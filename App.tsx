@@ -13,6 +13,8 @@ import { store } from './scr/store/store';
 
 library.add(fab, far, fas);
 
+// LogBox.ignoreAllLogs();
+
 const App = () => {
     return (
         <Provider store={store}>
