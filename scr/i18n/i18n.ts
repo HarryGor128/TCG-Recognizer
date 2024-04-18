@@ -2,8 +2,8 @@ import { initReactI18next } from 'react-i18next';
 
 import i18n from 'i18next';
 
-import chitTranslation from './locales/chitTranslation.json';
-import enTranslation from './locales/enTranslation.json';
+import chit from './locales/chit.json';
+import en from './locales/en.json';
 
 i18n.use(initReactI18next).init({
     fallbackLng: 'en',
@@ -16,10 +16,10 @@ i18n.use(initReactI18next).init({
     supportedLngs: ['en', 'chit'],
     resources: {
         en: {
-            translation: enTranslation,
+            translation: en,
         },
         chit: {
-            translation: chitTranslation,
+            translation: chit,
         },
     },
 });
