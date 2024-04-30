@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, Image, StyleSheet, View } from 'react-native';
+import { FlatList, Image, Platform, StyleSheet, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -122,6 +122,7 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
                     ButtonText={t('ARScene')}
                     Icon={['fas', 'vr-cardboard']}
                     ContainerStyle={StartOptionScreenStyles.button}
+                    Disabled={Platform.OS === 'ios'}
                 />
                 <CustomButton
                     OnPressCallback={opPressCardSearch}
