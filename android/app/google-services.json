@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "514274583337",
+    "project_id": "tcg-recognition-398112",
+    "storage_bucket": "tcg-recognition-398112.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:514274583337:android:24f0603e2027e23c368d38",
+        "android_client_info": {
+          "package_name": "com.tcg_recognizer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAP2Zur5MCRGbvuOwxoP7g4uBF4Yl9Pg20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

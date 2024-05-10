@@ -20,7 +20,8 @@
         "stopGradleWin": "cd android && gradlew --stop && cd ..",
         "stopGradleMac": "cd android && ./gradlew --stop && cd ..",
         "wifiConnect": "adb connect 192.168.1.9:40697",
-        "wifiDisconnect": "adb disconnect 192.168.1.9:40697"
+        "wifiDisconnect": "adb disconnect 192.168.1.9:40697",
+        "pod": "npx pod-install"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.4.2",
@@ -29,6 +30,7 @@
         "@fortawesome/free-solid-svg-icons": "^6.4.2",
         "@fortawesome/react-native-fontawesome": "^0.3.0",
         "@react-native-async-storage/async-storage": "^1.23.1",
+        "@react-native-firebase/app": "^19.2.2",
         "@react-navigation/native": "^6.1.7",
         "@react-navigation/native-stack": "^6.9.13",
         "@react-navigation/stack": "^6.3.17",
