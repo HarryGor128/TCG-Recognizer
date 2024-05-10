@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Alert, StyleSheet, View } from 'react-native';
 
@@ -17,11 +17,25 @@ import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/App
 import ColorConstant from '../../Constant/ColorConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import { PermissionService } from '../../Services/Common/PermissionService';
+import commonService from '../../Services/Common/commonService';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 
 type NavigationProps = NativeStackScreenProps<ScreenParamList, 'ARView'>;
 
 const ARScene = () => {
+    const [yAxis, setYAxis] = useState<number>(0);
+
+    useEffect(() => {
+        const incrementYAxis = async () => {
+            await commonService.sleep(100);
+            setYAxis((prev) => {
+                return prev < 360 ? prev + 1 : 0;
+            });
+        };
+
+        incrementYAxis();
+    }, [yAxis]);
+
     return (
         <ViroARScene style={{ flex: 1 }}>
             <ViroARImageMarker target={'QCDB_JP009'}>
@@ -33,6 +47,7 @@ const ARScene = () => {
                     <Viro3DObject
                         source={require('../../Assets/AR/3DModel/QCDB-JP009.obj')}
                         type={'OBJ'}
+                        rotation={[0, yAxis, 0]}
                     />
                 </ViroNode>
             </ViroARImageMarker>

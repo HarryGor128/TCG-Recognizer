@@ -221,7 +221,7 @@ const commonService = {
      * @param ms Delay minimum second (1000ms = 1s)
      * @returns Promise
      */
-    sleep(ms: number): Promise<any> {
+    sleep(ms: number): Promise<void> {
         return new Promise((resolve) => setTimeout(resolve, ms));
     },
 
