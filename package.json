@@ -21,7 +21,7 @@
         "stopGradleMac": "cd android && ./gradlew --stop && cd ..",
         "wifiConnect": "adb connect 192.168.1.9:40697",
         "wifiDisconnect": "adb disconnect 192.168.1.9:40697",
-        "pod": "npx pod-install"
+        "pod": "npx pod-install --repo-update"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.4.2",
