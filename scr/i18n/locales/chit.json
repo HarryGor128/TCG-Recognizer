@@ -15,5 +15,7 @@
     "Camera": "相機",
     "UploadFrom": "上傳自",
     "CardSearch": "搜尋卡片",
-    "NeedCameraPermission": "需要相機許可"
+    "NeedCameraPermission": "需要相機許可",
+    "ChatRoom": "聊天室",
+    "Edited": "已編輯"
 }

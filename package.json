@@ -19,8 +19,8 @@
         "adbRestart": "adb kill-server && adb start-server",
         "stopGradleWin": "cd android && gradlew --stop && cd ..",
         "stopGradleMac": "cd android && ./gradlew --stop && cd ..",
-        "wifiConnect": "adb connect 192.168.1.9:40697",
-        "wifiDisconnect": "adb disconnect 192.168.1.9:40697",
+        "wifiConnect": "adb connect 192.168.1.6:42891",
+        "wifiDisconnect": "adb disconnect 192.168.1.6:42891",
         "pod": "npx pod-install --repo-update"
     },
     "dependencies": {
@@ -41,6 +41,7 @@
         "@viro-community/react-viro": "^2.41.1",
         "axios": "^1.5.0",
         "i18next": "^23.8.1",
+        "intl-pluralrules": "^2.0.1",
         "moment": "^2.29.4",
         "node-html-parser": "^6.1.12",
         "patch-package": "^8.0.0",

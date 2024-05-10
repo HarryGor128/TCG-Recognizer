@@ -15,5 +15,7 @@
     "Camera": "Camera",
     "UploadFrom": "Upload from",
     "CardSearch": "Card Search",
-    "NeedCameraPermission": "Need camera permission"
+    "NeedCameraPermission": "Need camera permission",
+    "ChatRoom": "Chat Room",
+    "Edited": "Edited"
 }

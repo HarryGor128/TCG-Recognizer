@@ -7,6 +7,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { NavigationContainer } from '@react-navigation/native';
+import 'intl-pluralrules';
 
 import AppContainer from './scr/AppContainer';
 import ColorConstant from './scr/Constant/ColorConstant';
