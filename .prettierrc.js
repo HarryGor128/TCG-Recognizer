@@ -18,10 +18,14 @@ module.exports = {
         '^(react|react-(.*)$)',
         '<THIRD_PARTY_MODULES>',
         '^(Components/(.*)$|./Components/(.*)$|../Components/(.*)$)',
-        '^(Page/(.*)$|./Page/(.*)$|../Page/(.*)$)',
+        '^(Hook/(.*)$|./Hook/(.*)$|../Hook/(.*)$)',
+        '^(Type/(.*)$|./Type/(.*)$|../Type/(.*)$)',
+        '^(Services/(.*)$|./Services/(.*)$|../Services/(.*)$)',
         '^(store/(.*)$|./store/(.*)$|../store/(.*)$)',
+        '^(Page/(.*)$|./Page/(.*)$|../Page/(.*)$)',
         '^[./(.*)$|../(.*)$]',
     ],
     importOrderSeparation: true,
     importOrderSortSpecifiers: true,
+    plugins: ["@trivago/prettier-plugin-sort-imports"]
 };
