@@ -17,6 +17,7 @@ const useCameraAlbum = () => {
         setShowPopup,
         setPopupContent,
         setPopupTitle,
+        setOnPressAndroidBack,
     } = useContext(AppPopupContext);
 
     const onPressAlbum = async () => {
@@ -53,10 +54,11 @@ const useCameraAlbum = () => {
     );
 
     const openUploadPopup = () => {
-        setShowPopup(true);
         setPopupContent(popup);
         setPopupTitle(t('UploadFrom'));
         setPopupContainerStyles(UseCameraAlbumStyles.popupContainer);
+        setOnPressAndroidBack(setShowPopup(false));
+        setShowPopup(true);
     };
 
     return { openUploadPopup, photo, setPhoto };

@@ -17,5 +17,10 @@
     "CardSearch": "搜尋卡片",
     "NeedCameraPermission": "需要相機許可",
     "ChatRoom": "聊天室",
-    "Edited": "已編輯"
+    "Edited": "已編輯",
+    "Message": "訊息",
+    "ChangeNickname": "更改暱稱",
+    "Change": "更改",
+    "SetupNickname": "進入聊天室之前需要設定暱稱",
+    "RemovePrevMsg": "更改暱稱後，您先前發送的訊息將不再屬於您"
 }

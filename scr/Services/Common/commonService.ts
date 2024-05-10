@@ -1,10 +1,3 @@
-/* eslint-disable no-useless-escape */
-
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import moment from 'moment';
-
-import DateTimeFormatConst from '../../Constant/DateTimeFormat';
-
 const commonService = {
     /**
      *
@@ -43,56 +36,6 @@ const commonService = {
                 );
             }),
         );
-    },
-
-    /**
-     *
-     * @param format Default YYYY-MM-DD
-     * @returns 1900-01-01
-     */
-    defaultDate: function (format: string = DateTimeFormatConst.Today) {
-        return moment('1900-01-01').format(format);
-    },
-
-    /**
-     *
-     * @param format Default YYYY-MM-DD HH:mm:ss
-     * @returns Now datetime string
-     */
-    now: function (format: string = DateTimeFormatConst.Now) {
-        return moment().format(format);
-    },
-
-    /**
-     *
-     * @param formatDefault Default YYYY-MM-DD
-     * @returns Today date string
-     */
-    today: function (format: string = DateTimeFormatConst.Today): string {
-        return moment(new Date().toISOString().slice(0, 10)).format(format);
-    },
-
-    /**
-     *
-     * @param date Convert date object
-     * @param format Default YYYY-MM-DD
-     * @returns Date string
-     */
-    toDateString: function (
-        date: Date | string,
-        format: string = DateTimeFormatConst.Today,
-    ): string {
-        return moment(date).format(format);
-    },
-
-    /**
-     *
-     * @param date Date of birth
-     * @returns Age number
-     */
-    getAge: function (date: string): number {
-        var years = moment().diff(this.toDateString(date), 'years');
-        return years;
     },
 
     /**

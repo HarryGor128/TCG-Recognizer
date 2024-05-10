@@ -17,5 +17,10 @@
     "CardSearch": "Card Search",
     "NeedCameraPermission": "Need camera permission",
     "ChatRoom": "Chat Room",
-    "Edited": "Edited"
+    "Edited": "Edited",
+    "Message": "Message",
+    "ChangeNickname": "Change Nickname",
+    "Change": "Change",
+    "SetupNickname": "You need to setup a nickname before enter chat room",
+    "RemovePrevMsg": "The previous msg you sent wil not belong to you after you change your nickname"
 }

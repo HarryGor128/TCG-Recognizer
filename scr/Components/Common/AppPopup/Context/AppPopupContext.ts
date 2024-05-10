@@ -1,25 +1,27 @@
-import { ReactNode, createContext } from 'react';
+import { Dispatch, ReactNode, SetStateAction, createContext } from 'react';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 import { AppIconProps } from './../../AppIcon/AppIconRenderer';
 
 export type AppPopupContextType = {
     isShowPopup: boolean; // Popup visible
-    setShowPopup: Function; // Set popup visible
+    setShowPopup: Dispatch<SetStateAction<boolean>>; // Set popup visible
     popupContent: ReactNode; // Popup content
-    setPopupContent: Function; // Set popup content
+    setPopupContent: Dispatch<SetStateAction<ReactNode>>; // Set popup content
     onClosePopup: Function; // On close popup function
-    setOnClosePopup: Function; // Set on close popup function
+    setOnClosePopup: Dispatch<SetStateAction<Function>>; // Set on close popup function
     popupContainerStyles: StyleProp<ViewStyle>; // Popup container styles
-    setPopupContainerStyles: Function; // Set popup container styles
+    setPopupContainerStyles: Dispatch<SetStateAction<StyleProp<ViewStyle>>>; // Set popup container styles
     popupTitle?: string; // Popup title
-    setPopupTitle: Function; // Set popup title
+    setPopupTitle: Dispatch<SetStateAction<string | undefined>>; // Set popup title
     popupTitleStyles?: StyleProp<TextStyle>; // Popup title styles
-    setPopupTitleStyles: Function; // Set Popup title styles
+    setPopupTitleStyles: Dispatch<
+        SetStateAction<StyleProp<TextStyle> | undefined>
+    >; // Set Popup title styles
     titleIcon?: AppIconProps; // Title icon
-    setTitleIcon: Function; // Set title icon
+    setTitleIcon: Dispatch<SetStateAction<AppIconProps | undefined>>; // Set title icon
     onPressAndroidBack?: Function; // When user press android back button
-    setOnPressAndroidBack: Function; // Set when user press android back button
+    setOnPressAndroidBack: Dispatch<SetStateAction<Function> | undefined>; // Set when user press android back button
 };
 
 const defaultAppPopupContext: AppPopupContextType = {

@@ -3,12 +3,12 @@ import { View } from 'react-native';
 import AppPopup from './Components/Common/AppPopup/AppPopup';
 import CustomLoader from './Components/Common/CustomLoader/CustomLoader';
 
-import MainStack from './Page/Stack/MainStack';
+import useAxiosInterceptors from './Hook/Common/useAxiosInterceptors';
+import useKeyboardStatus from './Hook/Common/useKeyboardStatus';
 
 import { useAppSelector } from './store/storeHooks';
 
-import useAxiosInterceptors from './Hook/Common/useAxiosInterceptors';
-import useKeyboardStatus from './Hook/Common/useKeyboardStatus';
+import MainStack from './Page/Stack/MainStack';
 
 const AppContainer = () => {
     useKeyboardStatus();

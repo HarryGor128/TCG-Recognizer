@@ -1,6 +1,13 @@
 import { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FlatList, Image, Platform, StyleSheet, View } from 'react-native';
+import {
+    FlatList,
+    Image,
+    Platform,
+    ScrollView,
+    StyleSheet,
+    View,
+} from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -92,8 +99,12 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
         navigation.navigate('CardList');
     };
 
+    const onPressChatRoom = () => {
+        navigation.navigate('ChatRoom');
+    };
+
     return (
-        <View style={StartOptionScreenStyles.mainContainer}>
+        <ScrollView style={StartOptionScreenStyles.mainContainer}>
             <View style={StartOptionScreenStyles.logoContainer}>
                 <CustomButton
                     OnPressCallback={onPressChangeLang}
@@ -106,7 +117,7 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
                 />
                 <Image
                     source={require('../../Assets/Logo/Logo.png')}
-                    style={{ flex: 1, alignSelf: 'center' }}
+                    style={StartOptionScreenStyles.logo}
                     resizeMode={'contain'}
                 />
             </View>
@@ -130,8 +141,14 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
                     Icon={['fas', 'search']}
                     ContainerStyle={StartOptionScreenStyles.button}
                 />
+                <CustomButton
+                    OnPressCallback={onPressChatRoom}
+                    ButtonText={t('ChatRoom')}
+                    Icon={['fas', 'message']}
+                    ContainerStyle={StartOptionScreenStyles.button}
+                />
             </View>
-        </View>
+        </ScrollView>
     );
 };
 
@@ -140,8 +157,12 @@ export default StartOptionScreen;
 const StartOptionScreenStyles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        justifyContent: 'space-evenly',
         backgroundColor: ColorConstant.BG.Blue.Deep,
+    },
+
+    logo: {
+        height: 300,
+        alignSelf: 'center',
     },
 
     buttonContainer: {

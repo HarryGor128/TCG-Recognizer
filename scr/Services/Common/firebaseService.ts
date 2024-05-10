@@ -4,6 +4,7 @@ import storage from '@react-native-firebase/storage';
 import CollectionPath from '../../Constant/CollectionPath';
 import RemoteFilePath from '../../Constant/RemoteFilePath';
 import APIResult from '../../Type/API/APIResult';
+import FirebaseRealTimeMsg from '../../Type/API/FirebaseRealTimeMsg';
 import UploadFile from '../../Type/Common/UploadFile';
 
 const firebaseService = {
@@ -85,7 +86,7 @@ const firebaseService = {
             const result = await firestore()
                 .collection(collectionPath)
                 .doc(id)
-                .set(setObj);
+                .update(setObj);
             console.log('🚀 ~ file: firebaseService.ts:83 ~ result:', result);
 
             return Promise.resolve({ result: true, data: result });
@@ -131,6 +132,34 @@ const firebaseService = {
         } catch (error: any) {
             console.log('🚀 ~ file: firebaseService.ts:129 ~ error:', error);
             return Promise.resolve({ result: false, msg: error.toString() });
+        }
+    },
+
+    getCollectionRealtimeUpdate(
+        collectionPath: CollectionPath,
+        onResult: (data: any) => void,
+        onError: (error: Error) => void,
+    ): APIResult {
+        try {
+            let initialLoad = true;
+            const result = firestore()
+                .collection(collectionPath)
+                .onSnapshot((documentSnapshot) => {
+                    documentSnapshot.docChanges().forEach((change) => {
+                        if (initialLoad) {
+                            return;
+                        }
+                        const updateData: FirebaseRealTimeMsg = {
+                            changeType: change.type,
+                            data: change.doc.data() as any,
+                        };
+                        onResult(updateData);
+                    });
+                    initialLoad = false;
+                }, onError);
+            return { result: true, data: result };
+        } catch (error: any) {
+            return { result: false, msg: error.toString() };
         }
     },
 };

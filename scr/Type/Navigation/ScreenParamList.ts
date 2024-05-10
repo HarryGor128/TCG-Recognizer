@@ -9,6 +9,7 @@ type ScreenParamList = {
     GoogleResult: GoogleResultParam;
     MarketResult: MarketResult;
     CardList: undefined;
+    ChatRoom: undefined;
 };
 
 export default ScreenParamList;

@@ -13,5 +13,6 @@
         "ios/Pods/Headers/Public/Flipper-Folly/folly/lang",
         "ios/Pods/Headers/Public/RCT-Folly/folly/lang"
     ],
-    "i18n-ally.extract.autoDetect": false
+    "i18n-ally.extract.autoDetect": false,
+    "i18n-ally.keystyle": "nested"
 }

@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
 import ARViewScreen from '../ARView/ARView';
 import CardListScreen from '../CardList/CardListScreen';
+import ChatRoomScreen from '../ChatRoom/ChatRoomScreen';
 import GoogleResultScreen from '../GoogleResult/GoogleResultScreen';
 import InitializationScreen from '../Initialization/Initialization';
 import MarketResult from '../MarketResult/MarketResult';
@@ -28,6 +29,7 @@ const MainStack = () => {
             <Stack.Screen name={'MarketResult'} component={MarketResult} />
             <Stack.Screen name={'ARView'} component={ARViewScreen} />
             <Stack.Screen name={'CardList'} component={CardListScreen} />
+            <Stack.Screen name={'ChatRoom'} component={ChatRoomScreen} />
         </Stack.Navigator>
     );
 };

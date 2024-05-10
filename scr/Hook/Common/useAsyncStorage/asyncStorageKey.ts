@@ -1,3 +1,3 @@
-type asyncStorageKey = 'SearchHistory';
+type asyncStorageKey = 'SearchHistory' | 'Nickname';
 
 export default asyncStorageKey;
