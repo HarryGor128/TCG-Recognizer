@@ -28,6 +28,10 @@ end
 target 'TCG_Recognizer' do
   config = use_native_modules!
 
+  # Firebase setup
+  use_frameworks! :linkage => :static
+  $RNFirebaseAsStaticFramework = true
+
   use_react_native!(
     :path => config[:reactNativePath],
     # Enables Flipper.
