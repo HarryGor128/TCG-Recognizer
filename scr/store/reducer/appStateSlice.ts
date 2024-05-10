@@ -5,6 +5,7 @@ interface appState {
     isLoading: boolean;
     isKeyboardShow: boolean;
     loaderText: string;
+    isLogin: boolean;
 }
 
 // Define the initial state using that type
@@ -12,6 +13,7 @@ const initialState: appState = {
     isLoading: false,
     isKeyboardShow: false,
     loaderText: '',
+    isLogin: false,
 };
 
 export const appStateSlice = createSlice({
@@ -37,6 +39,14 @@ export const appStateSlice = createSlice({
         setKeyboardStatus: (state, action: PayloadAction<boolean>) => {
             state.isKeyboardShow = action.payload;
         },
+
+        userLogin: (state) => {
+            state.isLogin = true;
+        },
+
+        userLogout: (state) => {
+            state.isLogin = false;
+        },
     },
 });
 
@@ -47,6 +57,8 @@ export const {
     setLoaderState,
     setLoaderText,
     setKeyboardStatus,
+    userLogin,
+    userLogout,
 } = appStateSlice.actions;
 
 export default appStateSlice.reducer;
