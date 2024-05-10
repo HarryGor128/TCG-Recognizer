@@ -64,4 +64,8 @@ yarn-error.log
 
 # testing
 /coverage
+
+# API Key
 scr/Constant/googleAPIKey.ts
+android/app/google-services.json
+ios/GoogleService-Info.plist
