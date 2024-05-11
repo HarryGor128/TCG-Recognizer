@@ -46,7 +46,6 @@ const AppPopup = ({ children }: Props) => {
 
     const [isShowPopup, setShowPopup] = useState<boolean>(false);
     const [popupContent, setPopupContent] = useState<ReactNode>(<></>);
-    const [onClosePopup, setOnClosePopup] = useState<Function>(() => {});
     const [popupContainerStyles, setPopupContainerStyles] = useState<
         StyleProp<ViewStyle>
     >({});
@@ -58,14 +57,14 @@ const AppPopup = ({ children }: Props) => {
     const [onPressAndroidBack, setOnPressAndroidBack] = useState<
         Function | undefined
     >(undefined);
+    const [disablePressBackgroundClose, setDisablePressBackgroundClose] =
+        useState<boolean>(false);
 
     const value: AppPopupContextType = {
         isShowPopup,
         setShowPopup,
         popupContent,
         setPopupContent,
-        onClosePopup,
-        setOnClosePopup,
         popupContainerStyles,
         setPopupContainerStyles,
         popupTitle,
@@ -76,16 +75,17 @@ const AppPopup = ({ children }: Props) => {
         setTitleIcon,
         onPressAndroidBack,
         setOnPressAndroidBack,
+        disablePressBackgroundClose,
+        setDisablePressBackgroundClose,
     };
 
     const onPressBackground = () => {
         if (isKeyboardShow) {
             Keyboard.dismiss();
         } else {
-            if (onClosePopup) {
-                onClosePopup();
+            if (!disablePressBackgroundClose) {
+                setShowPopup(false);
             }
-            setShowPopup(false);
         }
     };
 
@@ -93,12 +93,12 @@ const AppPopup = ({ children }: Props) => {
     useEffect(() => {
         if (!isShowPopup) {
             setPopupContent(<></>);
-            setOnClosePopup(() => {});
             setPopupContainerStyles({});
             setPopupTitle(undefined);
             setPopupTitleStyles(undefined);
             setTitleIcon(undefined);
             setOnPressAndroidBack(undefined);
+            setDisablePressBackgroundClose(false);
         }
     }, [isShowPopup]);
 

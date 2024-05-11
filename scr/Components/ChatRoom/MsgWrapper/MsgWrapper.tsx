@@ -10,10 +10,16 @@ import TextComponent from '../../Common/TextComponent/TextComponent';
 interface MsgWrapperProps {
     chatMsg: ChatMessage;
     nickname: string;
+    onPressMsg?: Function;
     children: ReactNode;
 }
 
-const MsgWrapper = ({ chatMsg, nickname, children }: MsgWrapperProps) => {
+const MsgWrapper = ({
+    chatMsg,
+    nickname,
+    onPressMsg,
+    children,
+}: MsgWrapperProps) => {
     const { t } = useTranslation();
 
     return (
@@ -39,8 +45,18 @@ const MsgWrapper = ({ chatMsg, nickname, children }: MsgWrapperProps) => {
             >
                 {children}
             </View>
-            <TextComponent style={MsgWrapperStyles.dateTime}>{`${
-                chatMsg.lastUpdate > chatMsg.createTime ? `${t('Edited')} ` : ''
+            <TextComponent
+                style={[
+                    MsgWrapperStyles.dateTime,
+                    {
+                        textAlign:
+                            chatMsg.nickname === nickname ? 'right' : 'left',
+                    },
+                ]}
+            >{`${
+                chatMsg.lastUpdate > chatMsg.createTime
+                    ? `${t('Edited')} \n`
+                    : ''
             }${dateConverter.unixTimeToDateString(
                 chatMsg.createTime,
                 dateConverter.chatRoomDateFormat(chatMsg.createTime),
@@ -57,6 +73,8 @@ const MsgWrapperStyles = StyleSheet.create({
         borderRadius: 15,
         padding: 10,
         marginVertical: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     nickname: {

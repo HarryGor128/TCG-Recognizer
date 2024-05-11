@@ -19,8 +19,8 @@
         "adbRestart": "adb kill-server && adb start-server",
         "stopGradleWin": "cd android && gradlew --stop && cd ..",
         "stopGradleMac": "cd android && ./gradlew --stop && cd ..",
-        "wifiConnect": "adb connect 192.168.1.6:42891",
-        "wifiDisconnect": "adb disconnect 192.168.1.6:42891",
+        "wifiConnect": "adb connect 192.168.1.6:37701",
+        "wifiDisconnect": "adb disconnect 192.168.1.6:37701",
         "pod": "npx pod-install --repo-update"
     },
     "dependencies": {
@@ -52,6 +52,7 @@
         "react-native-gesture-handler": "^2.12.1",
         "react-native-hyperlink": "^0.0.22",
         "react-native-image-picker": "^7.0.0",
+        "react-native-image-viewing": "^0.2.2",
         "react-native-permissions": "^3.9.2",
         "react-native-safe-area-context": "^4.7.2",
         "react-native-screens": "^3.25.0",

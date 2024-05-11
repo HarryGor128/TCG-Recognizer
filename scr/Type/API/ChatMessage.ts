@@ -1,8 +1,10 @@
+import ChatMsgType from './ChatMsgType';
+
 class ChatMessage {
     id: string;
     nickname: string;
     msg: string;
-    type: 'text' | 'img';
+    type: ChatMsgType;
     createTime: number;
     lastUpdate: number;
 

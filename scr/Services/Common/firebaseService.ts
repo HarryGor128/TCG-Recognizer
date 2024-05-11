@@ -26,9 +26,19 @@ const firebaseService = {
         }
     },
 
-    async getCollection(collectionPath: CollectionPath): Promise<APIResult> {
+    async getCollection(
+        collectionPath: CollectionPath,
+        orderKey?: string,
+        isDescending?: boolean,
+    ): Promise<APIResult> {
         try {
-            const result = await firestore().collection(collectionPath).get();
+            const colRef = orderKey
+                ? firestore()
+                      .collection(collectionPath)
+                      .orderBy(orderKey, isDescending ? 'desc' : 'asc')
+                : firestore().collection(collectionPath);
+            const result = await colRef.get();
+
             let data: any[] = [];
             result.forEach((item) => {
                 data.push(item.data());

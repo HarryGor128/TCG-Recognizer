@@ -1,6 +1,6 @@
 import { ReactNode, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { Asset } from 'react-native-image-picker';
 
 import AppPopupContext from '../../Components/Common/AppPopup/Context/AppPopupContext';
@@ -12,13 +12,8 @@ const useCameraAlbum = () => {
 
     const [photo, setPhoto] = useState<Asset>({});
 
-    const {
-        setPopupContainerStyles,
-        setShowPopup,
-        setPopupContent,
-        setPopupTitle,
-        setOnPressAndroidBack,
-    } = useContext(AppPopupContext);
+    const { setShowPopup, setPopupContent, setPopupTitle } =
+        useContext(AppPopupContext);
 
     const onPressAlbum = async () => {
         const result = await mediaService.SelectPhoto();
@@ -37,7 +32,7 @@ const useCameraAlbum = () => {
     };
 
     const popup: ReactNode = (
-        <View style={UseCameraAlbumStyles.popupContent}>
+        <>
             <CustomButton
                 OnPressCallback={onPressAlbum}
                 ButtonText={t('Album')}
@@ -50,33 +45,26 @@ const useCameraAlbum = () => {
                 Icon={['fas', 'camera']}
                 ContainerStyle={UseCameraAlbumStyles.button}
             />
-        </View>
+        </>
     );
 
     const openUploadPopup = () => {
         setPopupContent(popup);
         setPopupTitle(t('UploadFrom'));
-        setPopupContainerStyles(UseCameraAlbumStyles.popupContainer);
-        setOnPressAndroidBack(setShowPopup(false));
         setShowPopup(true);
     };
 
-    return { openUploadPopup, photo, setPhoto };
+    const cleanPhoto = () => {
+        setPhoto({});
+    };
+
+    return { openUploadPopup, photo, cleanPhoto };
 };
 
 export default useCameraAlbum;
 
 const UseCameraAlbumStyles = StyleSheet.create({
-    popupContent: {
-        flex: 1,
-        justifyContent: 'center',
-    },
-
-    popupContainer: {
-        height: 350,
-    },
-
     button: {
-        marginVertical: 20,
+        marginVertical: 10,
     },
 });

@@ -22,5 +22,10 @@
     "ChangeNickname": "更改暱稱",
     "Change": "更改",
     "SetupNickname": "進入聊天室之前需要設定暱稱",
-    "RemovePrevMsg": "更改暱稱後，您先前發送的訊息將不再屬於您"
+    "RemovePrevMsg": "更改暱稱後，您先前發送的訊息將不再屬於您",
+    "NetworkError": "網絡錯誤",
+    "Option": "選項",
+    "EditMessage": "修改訊息",
+    "DeleteMessage": "刪除訊息",
+    "EditMessageIn": "編輯訊息發送於:"
 }

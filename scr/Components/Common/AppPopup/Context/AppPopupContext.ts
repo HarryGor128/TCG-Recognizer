@@ -8,8 +8,6 @@ export type AppPopupContextType = {
     setShowPopup: Dispatch<SetStateAction<boolean>>; // Set popup visible
     popupContent: ReactNode; // Popup content
     setPopupContent: Dispatch<SetStateAction<ReactNode>>; // Set popup content
-    onClosePopup: Function; // On close popup function
-    setOnClosePopup: Dispatch<SetStateAction<Function>>; // Set on close popup function
     popupContainerStyles: StyleProp<ViewStyle>; // Popup container styles
     setPopupContainerStyles: Dispatch<SetStateAction<StyleProp<ViewStyle>>>; // Set popup container styles
     popupTitle?: string; // Popup title
@@ -22,6 +20,8 @@ export type AppPopupContextType = {
     setTitleIcon: Dispatch<SetStateAction<AppIconProps | undefined>>; // Set title icon
     onPressAndroidBack?: Function; // When user press android back button
     setOnPressAndroidBack: Dispatch<SetStateAction<Function> | undefined>; // Set when user press android back button
+    disablePressBackgroundClose: boolean;
+    setDisablePressBackgroundClose: Dispatch<SetStateAction<boolean>>;
 };
 
 const defaultAppPopupContext: AppPopupContextType = {
@@ -29,8 +29,6 @@ const defaultAppPopupContext: AppPopupContextType = {
     setShowPopup: () => {},
     popupContent: null,
     setPopupContent: () => {},
-    onClosePopup: () => {},
-    setOnClosePopup: () => {},
     popupContainerStyles: {},
     setPopupContainerStyles: () => {},
     popupTitle: undefined,
@@ -41,6 +39,8 @@ const defaultAppPopupContext: AppPopupContextType = {
     setTitleIcon: () => {},
     onPressAndroidBack: undefined,
     setOnPressAndroidBack: () => {},
+    disablePressBackgroundClose: false,
+    setDisablePressBackgroundClose: () => {},
 };
 
 const AppPopupContext = createContext(defaultAppPopupContext);
@@ -50,8 +50,6 @@ const AppPopupContext = createContext(defaultAppPopupContext);
  * @param setShowPopup: Function; // Set popup visible
  * @param popupContent: ReactNode; // Popup content
  * @param setPopupContent: Function; // Set popup content
- * @param onClosePopup: Function; // On close popup function
- * @param setOnClosePopup: Function; // Set on close popup function
  * @param popupContainerStyles: StyleProp<ViewStyle>; // Popup container styles
  * @param setPopupContainerStyles: Function; // Set popup container styles
  * @param popupTitle?: string; // Popup title

@@ -66,7 +66,7 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
     const { setShowPopup, setPopupContent, setPopupTitle, setTitleIcon } =
         useContext(AppPopupContext);
 
-    const { openUploadPopup, photo, setPhoto } = useCameraAlbum();
+    const { openUploadPopup, photo, cleanPhoto } = useCameraAlbum();
 
     useAndroidBackButton();
 
@@ -75,7 +75,7 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
             navigation.navigate('GoogleResult', {
                 ScanningResult: photo.base64,
             });
-            setPhoto({});
+            cleanPhoto();
         }
     }, [photo]);
 

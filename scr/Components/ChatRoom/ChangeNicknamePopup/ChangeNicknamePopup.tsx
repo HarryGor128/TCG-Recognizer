@@ -49,6 +49,7 @@ const ChangeNicknamePopup = ({ refreshName }: ChangeNicknamePopupProps) => {
                 ContainerStyle={ChangeNicknamePopupStyles.button}
                 ButtonText={t('Change')}
                 OnPressCallback={onPressSend}
+                Disabled={!changeNickname}
             />
         </>
     );

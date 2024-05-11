@@ -22,5 +22,10 @@
     "ChangeNickname": "Change Nickname",
     "Change": "Change",
     "SetupNickname": "You need to setup a nickname before enter chat room",
-    "RemovePrevMsg": "The previous msg you sent wil not belong to you after you change your nickname"
+    "RemovePrevMsg": "The previous msg you sent wil not belong to you after you change your nickname",
+    "NetworkError": "Network Error",
+    "Option": "Option",
+    "EditMessage": "Edit message",
+    "DeleteMessage": "Delete message",
+    "EditMessageIn": "Editing message sent in :"
 }

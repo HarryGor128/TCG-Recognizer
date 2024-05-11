@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet, View } from 'react-native';
 
@@ -18,10 +18,14 @@ import useChatRoomMessage from '../../Hook/useChatRoomMessage';
 import firebaseService from '../../Services/Common/firebaseService';
 import ChatMessage from '../../Type/API/ChatMessage';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
+import { closeLoader, openLoader } from '../../store/reducer/appStateSlice';
+import { useAppDispatch } from '../../store/storeHooks';
 
 type NavigationProps = NativeStackScreenProps<ScreenParamList, 'ChatRoom'>;
 
 const ChatRoomScreen = ({ navigation }: NavigationProps) => {
+    const listRef = useRef<FlatList<ChatMessage>>(null);
+
     const { t } = useTranslation();
 
     const {
@@ -29,19 +33,32 @@ const ChatRoomScreen = ({ navigation }: NavigationProps) => {
         setTitleIcon,
         setPopupTitle,
         setPopupContent,
-        setOnClosePopup,
+        setDisablePressBackgroundClose,
     } = useContext(AppPopupContext);
 
     const { chatMessage } = useChatRoomMessage();
     const { getData } = useAsyncStorage();
+    const dispatch = useAppDispatch();
 
     const [chatList, setChatList] = useState<ChatMessage[]>([]);
     const [selectMsg, setSelectMsg] = useState<ChatMessage>(new ChatMessage());
     const [sendMsgStatus, setSendMsgStatus] = useState<SendMsgBoxStatus>('add');
     const [nickname, setNickname] = useState<string>('');
 
+    const scrollListToEnd = async () => {
+        if (listRef.current !== null) {
+            if (chatMessage.changeType === 'added') {
+                listRef.current.scrollToEnd();
+            }
+        }
+    };
+
     const getMsgList = async () => {
-        const result = await firebaseService.getCollection('chat');
+        const result = await firebaseService.getCollection(
+            'chat',
+            'createTime',
+            true,
+        );
         setChatList(result.data);
     };
 
@@ -50,13 +67,16 @@ const ChatRoomScreen = ({ navigation }: NavigationProps) => {
         if (nickname) {
             setNickname(nickname);
         } else {
+            setDisablePressBackgroundClose(true);
             onPressChangeNickname();
         }
     };
 
     useEffect(() => {
+        dispatch(openLoader());
         getMsgList();
         getNickname();
+        dispatch(closeLoader());
     }, []);
 
     useEffect(() => {
@@ -101,11 +121,6 @@ const ChatRoomScreen = ({ navigation }: NavigationProps) => {
         setTitleIcon({ Icon: ['fas', 'signature'], IconSize: 30 });
         setPopupTitle(t('ChangeNickname'));
         setPopupContent(<ChangeNicknamePopup refreshName={onRefresh} />);
-        setOnClosePopup(() => {
-            if (!nickname) {
-                navigation.goBack();
-            }
-        });
         setShowPopup(true);
     };
 
@@ -128,19 +143,28 @@ const ChatRoomScreen = ({ navigation }: NavigationProps) => {
                 }
             />
             <FlatList
+                inverted
                 style={{ flex: 1 }}
                 data={chatList}
-                renderItem={(list) => {
-                    return (
-                        <ChatMsgRenderer
-                            chatMsg={list.item}
-                            setSelectMsg={setSelectMsg}
-                        />
-                    );
-                }}
+                renderItem={(list) => (
+                    <ChatMsgRenderer
+                        chatMsg={list.item}
+                        nickname={nickname}
+                        setSelectMsg={setSelectMsg}
+                        setSendMsgStatus={setSendMsgStatus}
+                    />
+                )}
                 keyExtractor={(_, index) => index.toString()}
+                ref={listRef}
+                onContentSizeChange={scrollListToEnd}
             />
-            <SendMsgBox selectMsg={selectMsg} status={sendMsgStatus} />
+            <SendMsgBox
+                nickname={nickname}
+                selectMsg={selectMsg}
+                status={sendMsgStatus}
+                setSelectMsg={setSelectMsg}
+                setSendMsgStatus={setSendMsgStatus}
+            />
         </View>
     );
 };
