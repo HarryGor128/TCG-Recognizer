@@ -13,6 +13,7 @@ import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/App
 import AppPopupContext from '../../Components/Common/AppPopup/Context/AppPopupContext';
 import CustomButton from '../../Components/Common/CustomButton/CustomButton';
 import ColorConstant from '../../Constant/ColorConstant';
+import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
 import useAsyncStorage from '../../Hook/Common/useAsyncStorage/useAsyncStorage';
 import useChatRoomMessage from '../../Hook/useChatRoomMessage';
 import firebaseService from '../../Services/Common/firebaseService';
@@ -39,6 +40,9 @@ const ChatRoomScreen = ({ navigation }: NavigationProps) => {
     const { chatMessage } = useChatRoomMessage();
     const { getData } = useAsyncStorage();
     const dispatch = useAppDispatch();
+    useAndroidBackButton(() => {
+        navigation.goBack();
+    });
 
     const [chatList, setChatList] = useState<ChatMessage[]>([]);
     const [selectMsg, setSelectMsg] = useState<ChatMessage>(new ChatMessage());
@@ -48,7 +52,7 @@ const ChatRoomScreen = ({ navigation }: NavigationProps) => {
     const scrollListToEnd = async () => {
         if (listRef.current !== null) {
             if (chatMessage.changeType === 'added') {
-                listRef.current.scrollToEnd();
+                listRef.current.scrollToIndex({ index: 0 });
             }
         }
     };
@@ -89,7 +93,7 @@ const ChatRoomScreen = ({ navigation }: NavigationProps) => {
                 switch (chatMessage.changeType) {
                     case 'added':
                         if (!idList.includes(chatMessage.data.id)) {
-                            newList.push(chatMessage.data);
+                            newList.unshift(chatMessage.data);
                         }
                         break;
                     case 'modified':

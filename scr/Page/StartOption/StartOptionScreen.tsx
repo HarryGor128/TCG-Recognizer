@@ -9,6 +9,7 @@ import {
     View,
 } from 'react-native';
 
+import { CommonActions } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import { AppIconProps } from '../../Components/Common/AppIcon/AppIconRenderer';
@@ -70,11 +71,21 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
 
     useAndroidBackButton();
 
+    const routingPage = (
+        page: keyof ScreenParamList,
+        params?: ScreenParamList[keyof ScreenParamList],
+    ) => {
+        navigation.dispatch(
+            CommonActions.reset({
+                index: 1,
+                routes: [{ name: 'StartOption' }, { name: page, params }],
+            }),
+        );
+    };
+
     useEffect(() => {
         if (photo?.base64 !== undefined) {
-            navigation.navigate('GoogleResult', {
-                ScanningResult: photo.base64,
-            });
+            routingPage('GoogleResult', { ScanningResult: photo.base64 });
             cleanPhoto();
         }
     }, [photo]);
@@ -84,7 +95,7 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
     };
 
     const onPressAR = () => {
-        navigation.navigate('ARView');
+        routingPage('ARView');
     };
 
     const onPressChangeLang = () => {
@@ -96,11 +107,11 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
     };
 
     const opPressCardSearch = () => {
-        navigation.navigate('CardList');
+        routingPage('CardList');
     };
 
     const onPressChatRoom = () => {
-        navigation.navigate('ChatRoom');
+        routingPage('ChatRoom');
     };
 
     return (
