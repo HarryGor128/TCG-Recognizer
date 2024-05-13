@@ -5,6 +5,7 @@ import CustomLoader from './Components/Common/CustomLoader/CustomLoader';
 
 import useAxiosInterceptors from './Hook/Common/useAxiosInterceptors';
 import useKeyboardStatus from './Hook/Common/useKeyboardStatus';
+import useNetworkError from './Hook/Common/useNetworkError';
 
 import { useAppSelector } from './store/storeHooks';
 
@@ -14,6 +15,7 @@ const AppContainer = () => {
     useKeyboardStatus();
 
     useAxiosInterceptors();
+    useNetworkError();
 
     const appState = useAppSelector((state) => state.appState);
 
