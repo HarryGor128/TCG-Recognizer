@@ -56,6 +56,14 @@ const ARScene = () => {
 };
 
 const ARViewScreen = ({ navigation }: NavigationProps) => {
+    ViroARTrackingTargets.createTargets({
+        QCDB_JP009: {
+            source: require('../../Assets/AR/QCDB-JP009.jpg'),
+            orientation: 'Up',
+            physicalWidth: 0.059, // real world width in meters
+        },
+    });
+
     const { t } = useTranslation();
 
     useAndroidBackButton(() => {
@@ -90,14 +98,6 @@ const ARViewScreen = ({ navigation }: NavigationProps) => {
         </View>
     );
 };
-
-ViroARTrackingTargets.createTargets({
-    QCDB_JP009: {
-        source: require('../../Assets/AR/QCDB-JP009.jpg'),
-        orientation: 'Up',
-        physicalWidth: 0.059, // real world width in meters
-    },
-});
 
 export default ARViewScreen;
 
