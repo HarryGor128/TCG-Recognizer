@@ -38,7 +38,34 @@ const ARScene = () => {
 
     return (
         <ViroARScene style={{ flex: 1 }}>
-            <ViroARImageMarker target={'QCDB_JP009'}>
+            <ViroARImageMarker
+                target={'QCDB_JP009'}
+                onHover={(isHovering) => {
+                    if (isHovering) {
+                        console.log('QCDB_JP009');
+                    }
+                }}
+            >
+                <ViroNode
+                    scale={[0.005, 0.005, 0.005]}
+                    rotation={[0, -90, 0]}
+                    dragType={'FixedToWorld'}
+                >
+                    <Viro3DObject
+                        source={require('../../Assets/AR/3DModel/QCDB-JP009.obj')}
+                        type={'OBJ'}
+                        rotation={[0, yAxis, 0]}
+                    />
+                </ViroNode>
+            </ViroARImageMarker>
+            <ViroARImageMarker
+                target={'DE03JP015'}
+                onHover={(isHovering) => {
+                    if (isHovering) {
+                        console.log('DE03JP015');
+                    }
+                }}
+            >
                 <ViroNode
                     scale={[0.005, 0.005, 0.005]}
                     rotation={[0, -90, 0]}
@@ -59,6 +86,11 @@ const ARViewScreen = ({ navigation }: NavigationProps) => {
     ViroARTrackingTargets.createTargets({
         QCDB_JP009: {
             source: require('../../Assets/AR/QCDB-JP009.jpg'),
+            orientation: 'Up',
+            physicalWidth: 0.059, // real world width in meters
+        },
+        DE03JP015: {
+            source: require('../../Assets/AR/DE03JP015.jpg'),
             orientation: 'Up',
             physicalWidth: 0.059, // real world width in meters
         },
