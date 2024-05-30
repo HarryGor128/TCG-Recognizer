@@ -58,7 +58,7 @@ const firebaseService = {
         }
     },
 
-    async addDoc(
+    async addDocWithHash(
         collectionPath: CollectionPath,
         setObj: any,
         uidField: string,
@@ -83,6 +83,33 @@ const firebaseService = {
             });
         } catch (error: any) {
             console.log('🚀 ~ file: firebaseService.ts:71 ~ error:', error);
+            return Promise.resolve({ result: false, msg: error.toString() });
+        }
+    },
+
+    async addDocByID(
+        collectionPath: CollectionPath,
+        id: string,
+        setObj: any,
+    ): Promise<APIResult> {
+        try {
+            const newDocRef = await firestore()
+                .collection(collectionPath)
+                .doc(id);
+            console.log(
+                '🚀 ~ file: firebaseService.ts:97 ~ newDocRef:',
+                newDocRef,
+            );
+
+            const result = await newDocRef.set(setObj);
+            console.log('🚀 ~ file: firebaseService.ts:103 ~ result:', result);
+
+            return Promise.resolve({
+                result: true,
+                data: result,
+            });
+        } catch (error: any) {
+            console.log('🚀 ~ file: firebaseService.ts:108 ~ error:', error);
             return Promise.resolve({ result: false, msg: error.toString() });
         }
     },

@@ -7,7 +7,7 @@ const useAndroidBackButton = (
     const onBackPress = () => {
         if (onPressBack) {
             onPressBack();
-            return false;
+            return true;
         }
 
         return true;

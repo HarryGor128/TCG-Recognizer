@@ -1,21 +1,18 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { useEffect, useRef, useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-import ChangeNicknamePopup from '../../Components/ChatRoom/ChangeNicknamePopup/ChangeNicknamePopup';
 import ChatMsgRenderer from '../../Components/ChatRoom/ChatMsgRenderer/ChatMsgRenderer';
 import SendMsgBox from '../../Components/ChatRoom/SendMsgBox/SendMsgBox';
 import SendMsgBoxStatus from '../../Components/ChatRoom/SendMsgBox/SendMsgBoxStatus';
 import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
 import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
-import AppPopupContext from '../../Components/Common/AppPopup/Context/AppPopupContext';
 import CustomButton from '../../Components/Common/CustomButton/CustomButton';
 import ColorConstant from '../../Constant/ColorConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
-import useAsyncStorage from '../../Hook/Common/useAsyncStorage/useAsyncStorage';
 import useChatRoomMessage from '../../Hook/useChatRoomMessage';
+import useNickname from '../../Hook/useNickname';
 import firebaseService from '../../Services/Common/firebaseService';
 import ChatMessage from '../../Type/API/ChatMessage';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
@@ -27,18 +24,9 @@ type NavigationProps = NativeStackScreenProps<ScreenParamList, 'ChatRoom'>;
 const ChatRoomScreen = ({ navigation }: NavigationProps) => {
     const listRef = useRef<FlatList<ChatMessage>>(null);
 
-    const { t } = useTranslation();
-
-    const {
-        setShowPopup,
-        setTitleIcon,
-        setPopupTitle,
-        setPopupContent,
-        setDisablePressBackgroundClose,
-    } = useContext(AppPopupContext);
+    const { nickname, getNickname, onPressChangeNickname } = useNickname();
 
     const { chatMessage } = useChatRoomMessage();
-    const { getData } = useAsyncStorage();
     const dispatch = useAppDispatch();
     useAndroidBackButton(() => {
         navigation.goBack();
@@ -47,7 +35,6 @@ const ChatRoomScreen = ({ navigation }: NavigationProps) => {
     const [chatList, setChatList] = useState<ChatMessage[]>([]);
     const [selectMsg, setSelectMsg] = useState<ChatMessage>(new ChatMessage());
     const [sendMsgStatus, setSendMsgStatus] = useState<SendMsgBoxStatus>('add');
-    const [nickname, setNickname] = useState<string>('');
 
     const scrollListToEnd = async () => {
         if (listRef.current !== null) {
@@ -64,16 +51,6 @@ const ChatRoomScreen = ({ navigation }: NavigationProps) => {
             true,
         );
         setChatList(result.data);
-    };
-
-    const getNickname = async () => {
-        const nickname = await getData('Nickname');
-        if (nickname) {
-            setNickname(nickname);
-        } else {
-            setDisablePressBackgroundClose(true);
-            onPressChangeNickname();
-        }
     };
 
     useEffect(() => {
@@ -115,18 +92,6 @@ const ChatRoomScreen = ({ navigation }: NavigationProps) => {
             });
         }
     }, [chatMessage]);
-
-    const onRefresh = () => {
-        getNickname();
-        setShowPopup(false);
-    };
-
-    const onPressChangeNickname = () => {
-        setTitleIcon({ Icon: ['fas', 'signature'], IconSize: 30 });
-        setPopupTitle(t('ChangeNickname'));
-        setPopupContent(<ChangeNicknamePopup refreshName={onRefresh} />);
-        setShowPopup(true);
-    };
 
     return (
         <View style={ChatRoomScreenStyles.mainContainer}>

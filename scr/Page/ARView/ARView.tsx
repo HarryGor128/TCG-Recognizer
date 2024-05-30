@@ -14,16 +14,24 @@ import {
 
 import AppHeader from '../../Components/Common/AppHeader/AppHeaderRenderer';
 import AppHeaderBackButton from '../../Components/Common/AppHeaderBackButton/AppHeaderBackButton';
+import CustomButton from '../../Components/Common/CustomButton/CustomButton';
 import ColorConstant from '../../Constant/ColorConstant';
 import useAndroidBackButton from '../../Hook/Common/useAndroidBackButton';
+import useNickname from '../../Hook/useNickname';
 import { PermissionService } from '../../Services/Common/PermissionService';
 import commonService from '../../Services/Common/commonService';
+import firebaseService from '../../Services/Common/firebaseService';
 import ScreenParamList from '../../Type/Navigation/ScreenParamList';
+import { closeLoader, openLoader } from '../../store/reducer/appStateSlice';
+import { useAppDispatch } from '../../store/storeHooks';
 
 type NavigationProps = NativeStackScreenProps<ScreenParamList, 'ARView'>;
 
 const ARScene = () => {
     const [yAxis, setYAxis] = useState<number>(0);
+    const [targetCardList, setTargetCardList] = useState<string[]>([]);
+
+    const { nickname, getNickname } = useNickname();
 
     useEffect(() => {
         const incrementYAxis = async () => {
@@ -36,13 +44,40 @@ const ARScene = () => {
         incrementYAxis();
     }, [yAxis]);
 
+    useEffect(() => {
+        const addToFirebase = async () => {
+            await firebaseService.addDocByID('AR', nickname, {
+                cardList: targetCardList,
+            });
+        };
+
+        getNickname();
+        if (nickname && targetCardList.length > 0) {
+            addToFirebase();
+        }
+    }, [targetCardList, nickname]);
+
+    const addCard = (target: string) => {
+        console.log('🚀 ~ file: ARView.tsx:41 ~ addCard ~ target:', target);
+        setTargetCardList((prevList) => {
+            const newList: string[] = JSON.parse(JSON.stringify(prevList));
+            const findCard = newList.find((item) => item === target);
+
+            if (!findCard) {
+                newList.push(target);
+            }
+
+            return newList;
+        });
+    };
+
     return (
         <ViroARScene style={{ flex: 1 }}>
             <ViroARImageMarker
                 target={'QCDB_JP009'}
                 onHover={(isHovering) => {
                     if (isHovering) {
-                        console.log('QCDB_JP009');
+                        addCard('89631146');
                     }
                 }}
             >
@@ -62,18 +97,20 @@ const ARScene = () => {
                 target={'DE03JP015'}
                 onHover={(isHovering) => {
                     if (isHovering) {
-                        console.log('DE03JP015');
+                        addCard('44508094');
                     }
                 }}
             >
                 <ViroNode
-                    scale={[0.005, 0.005, 0.005]}
+                    scale={[0.003, 0.003, 0.003]}
                     rotation={[0, -90, 0]}
                     dragType={'FixedToWorld'}
                 >
                     <Viro3DObject
-                        source={require('../../Assets/AR/3DModel/QCDB-JP009.obj')}
+                        source={require('../../Assets/AR/3DModel/DE03JP015.obj')}
                         type={'OBJ'}
+                        rotationPivot={[0, 0, 30]}
+                        position={[0, 20, -30]}
                         rotation={[0, yAxis, 0]}
                     />
                 </ViroNode>
@@ -96,9 +133,19 @@ const ARViewScreen = ({ navigation }: NavigationProps) => {
         },
     });
 
+    const dispatch = useAppDispatch();
+
+    const { nickname, getNickname, onPressChangeNickname } = useNickname();
+
     const { t } = useTranslation();
 
+    const cleanData = async () => {
+        getNickname();
+        await firebaseService.deleteDoc('AR', nickname);
+    };
+
     useAndroidBackButton(() => {
+        cleanData();
         navigation.goBack();
     });
 
@@ -112,14 +159,34 @@ const ARViewScreen = ({ navigation }: NavigationProps) => {
     };
 
     useEffect(() => {
+        dispatch(openLoader());
+        getNickname();
         cameraPermission();
+        dispatch(closeLoader());
     }, []);
 
     return (
         <View style={ARViewStyles.mainContainer}>
             <AppHeader
-                LeftStack={<AppHeaderBackButton navigation={navigation} />}
                 Title={t('ARScene')}
+                LeftStack={
+                    <AppHeaderBackButton
+                        navigation={navigation}
+                        beforeGoBack={() => cleanData()}
+                    />
+                }
+                RightStack={
+                    <CustomButton
+                        OnPressCallback={onPressChangeNickname}
+                        Icon={['fas', 'signature']}
+                        IconSize={30}
+                        IconColor={ColorConstant.Text.White.Normal}
+                        ButtonContainerStyle={{
+                            padding: 0,
+                            backgroundColor: ColorConstant.Transparent.Clear,
+                        }}
+                    />
+                }
             />
             <ViroARSceneNavigator
                 autofocus={true}

@@ -77,7 +77,7 @@ const SendMsgBox = ({
     const onPressSendText = async () => {
         const result =
             status === 'add'
-                ? await firebaseService.addDoc(
+                ? await firebaseService.addDocWithHash(
                       'chat',
                       createSendMsg('text'),
                       'id',
@@ -128,7 +128,7 @@ const SendMsgBox = ({
         );
 
         if (uploadResult.result) {
-            const result = await firebaseService.addDoc(
+            const result = await firebaseService.addDocWithHash(
                 'chat',
                 {
                     ...createSendMsg('img'),

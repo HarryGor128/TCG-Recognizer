@@ -1,3 +1,3 @@
-type CollectionPath = 'chat';
+type CollectionPath = 'chat' | 'AR';
 
 export default CollectionPath;
