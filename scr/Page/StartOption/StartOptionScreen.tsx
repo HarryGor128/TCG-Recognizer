@@ -141,8 +141,8 @@ const StartOptionScreen = ({ navigation }: NavigationProps) => {
                 />
                 <CustomButton
                     OnPressCallback={onPressAR}
-                    ButtonText={t('ARScene')}
-                    Icon={['fas', 'vr-cardboard']}
+                    ButtonText={t('Battle')}
+                    Icon={['fas', 'person-rifle']}
                     ContainerStyle={StartOptionScreenStyles.button}
                     Disabled={Platform.OS === 'ios'}
                 />

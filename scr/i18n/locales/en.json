@@ -27,5 +27,12 @@
     "Option": "Option",
     "EditMessage": "Edit message",
     "DeleteMessage": "Delete message",
-    "EditMessageIn": "Editing message sent in :"
+    "EditMessageIn": "Editing message sent in :",
+    "Battle": "Battle",
+    "NeedToScanOneCard": "You need to scan at least one card.",
+    "YourATK": "Your ATK: ",
+    "Opponent": "Opponent",
+    "YouWin": "You win!",
+    "YouLose": "You lose!",
+    "Draw": "Draw"
 }

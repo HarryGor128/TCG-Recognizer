@@ -143,6 +143,7 @@ const AppPopupStyles = StyleSheet.create({
         flex: 1,
         margin: 20,
         padding: 20,
+        maxHeight: '90%',
         borderRadius: 10,
         backgroundColor: ColorConstant.BG.White.Normal,
     },

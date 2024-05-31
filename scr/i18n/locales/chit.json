@@ -27,5 +27,12 @@
     "Option": "選項",
     "EditMessage": "修改訊息",
     "DeleteMessage": "刪除訊息",
-    "EditMessageIn": "編輯訊息發送於:"
+    "EditMessageIn": "編輯訊息發送於:",
+    "Battle": "戰鬥",
+    "NeedToScanOneCard": "您需要最少掃描一張卡",
+    "YourATK": "你的攻擊力：",
+    "Opponent": "對手",
+    "YouWin": "你赢了!",
+    "YouLose": "你輸了!",
+    "Draw": "平手"
 }

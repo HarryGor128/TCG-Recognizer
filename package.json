@@ -19,8 +19,8 @@
         "adbRestart": "adb kill-server && adb start-server",
         "stopGradleWin": "cd android && gradlew --stop && cd ..",
         "stopGradleMac": "cd android && ./gradlew --stop && cd ..",
-        "wifiConnect": "adb connect 192.168.10.54:41881",
-        "wifiDisconnect": "adb disconnect 192.168.10.54:41881",
+        "wifiConnect": "adb connect 192.168.10.54:43405",
+        "wifiDisconnect": "adb disconnect 192.168.10.54:43405",
         "pod": "npx pod-install --repo-update"
     },
     "dependencies": {

@@ -43,7 +43,7 @@ const useNickname = () => {
         setShowPopup(true);
     };
 
-    return { nickname, getNickname, onPressChangeNickname };
+    return { nickname, getNickname, onPressChangeNickname, setNickname };
 };
 
 export default useNickname;
