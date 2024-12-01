@@ -1,3 +1,5 @@
+Video Demo: https://www.youtube.com/watch?v=PfZAzwfT1pY&ab_channel=HarryChan
+
 TCG Recognizer is a cutting-edge mobile application developed using React Native, a popular and efficient TypeScript framework for building native mobile apps. This application is designed to recognize and catalog Trading Card Game (TCG) cards.
 
 ## Step 1: Start the Metro Server
